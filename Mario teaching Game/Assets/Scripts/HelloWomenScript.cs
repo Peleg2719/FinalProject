@@ -1,52 +1,32 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class HelloWomenScript : MonoBehaviour
 {
-
-
     public GameObject canvas;
     public Text sentenceText;
+    private DialogManager dialogManager;
     public string sentence = "The man touched the woman!";
 
-   void Start()
+    void Start()
     {
-        // Ensure the canvas is initially inactive
-        if (canvas != null)
-        {
-            canvas.SetActive(false);
-        }
+        dialogManager = FindObjectOfType<DialogManager>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("HelloWomen"))
+        if (other.CompareTag("Player"))
         {
-            // Display the canvas with the sentence
-            if (canvas != null && sentenceText != null)
-            {
-                sentenceText.text = sentence;
-                canvas.SetActive(true);
-                Debug.Log("mario touch women");
-            }
-            Debug.Log("mario touch women2");
+            dialogManager.ShowDialog();
         }
     }
+    
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("HelloWomen"))
-        {
-            // Hide the canvas when the man exits the trigger area
-            if (canvas != null)
-            {
-                canvas.SetActive(false);
-            }
-        }
-    }
+    // void OnTriggerExit2D(Collider2D other)
+    // {
+    //     if (other.CompareTag("Player"))
+    //     {
+    //         dialogManager.HideDialogPanel();
+    //     }
+    // }
 }
-

@@ -3,8 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static bool isGamePaused = false;
     public static GameManager Instance { get; private set; }
-
+    public bool isOKButtonClicked = false;
     public int world { get; private set; }
     public int stage { get; private set; }
     public int lives { get; private set; }
@@ -17,6 +18,18 @@ public class GameManager : MonoBehaviour
         } else {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if (isGamePaused)
+        {
+            Time.timeScale = 0f; // Pause the game
+        }
+        else
+        {
+            Time.timeScale = 1f; // Resume the game
         }
     }
 
@@ -94,4 +107,8 @@ public class GameManager : MonoBehaviour
         lives++;
     }
 
+    public void OnClickOk(){
+        isOKButtonClicked = true;
+        isGamePaused = false;
+    }
 }
