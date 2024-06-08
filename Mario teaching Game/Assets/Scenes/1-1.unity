@@ -2863,7 +2863,7 @@ GameObject:
   - component: {fileID: 565429188}
   - component: {fileID: 565429187}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: HelloWomenText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2886,8 +2886,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000014305, y: 0.4}
-  m_SizeDelta: {x: 8.1587, y: 2.2118}
+  m_AnchoredPosition: {x: -0.0776, y: 0.60555}
+  m_SizeDelta: {x: 8.0034, y: 1.8007}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &565429187
 MonoBehaviour:
@@ -2939,9 +2939,9 @@ MonoBehaviour:
   m_fontSize: 1
   m_fontSizeBase: 1
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 0
+  m_fontSizeMax: 1
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -5579,8 +5579,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 32.4478, y: 11.7167}
-  m_SizeDelta: {x: 24.6762, y: 4.0547}
+  m_AnchoredPosition: {x: 32.47368, y: 11.7167}
+  m_SizeDelta: {x: 24.728, y: 4.0547}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &957508558
 GameObject:
@@ -5696,9 +5696,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877a516c08ab41e4c95a457de6fab526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  sentenceText: {fileID: 0}
-  sentence: The man touched the woman!
+  dialogueText: {fileID: 565429187}
+  dialogManager: {fileID: 1097772607}
 --- !u!1 &968703600
 GameObject:
   m_ObjectHideFlags: 0
@@ -6083,9 +6082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877a516c08ab41e4c95a457de6fab526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  sentenceText: {fileID: 0}
-  sentence: The man touched the woman!
+  dialogueText: {fileID: 0}
+  dialogManager: {fileID: 0}
 --- !u!1001 &1050009347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9309,7 +9307,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1608399485}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1097772607}
+        m_TargetAssemblyTypeName: DialogManager, Assembly-CSharp
+        m_MethodName: ContinueGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1608399485
 MonoBehaviour:
   m_ObjectHideFlags: 0
