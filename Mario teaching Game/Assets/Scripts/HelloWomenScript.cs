@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using GoogleCloudStreamingSpeechToText;
 using TMPro;
+using System.Threading;
 public class HelloWomenScript : MonoBehaviour
 {
     public  TMP_Text dialogueText; // Updated to reference TMP_Tex dialogueText; // Assign this in the Unity Editor
@@ -14,7 +15,7 @@ public class HelloWomenScript : MonoBehaviour
         if (recognizer == null)
         {
             Debug.LogError("StreamingRecognizer component not found!");
-            return;
+           
         }
 
        // Find the TextHelloWomen object directly
@@ -66,14 +67,15 @@ public class HelloWomenScript : MonoBehaviour
 
     void OnSpeechRecognized(string text)
     {
-        Debug.Log("Speech Recognized: " + text);
-
-        if (dialogueText != null && text.ToLower() == "im good thanks how are you")
+        Debug.Log("Speech Recognized-HelloWomen: " + text);
+        
+        if (dialogueText != null && (text== "I am fine thank you how are you" || text == "I'm fine thank you how are you"))
         {
             dialogueText.color = Color.red;
+            Thread.Sleep(1000);
             if (dialogManager != null)
             {
-                dialogManager.HideDialogPanel();
+                dialogManager.ContinueGame();
             }
             else
             {
