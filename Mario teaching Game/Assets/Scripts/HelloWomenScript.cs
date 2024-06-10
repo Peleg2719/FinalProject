@@ -10,12 +10,12 @@ public class HelloWomenScript : MonoBehaviour
 
     void Start()
     {
-        /*recognizer = GetComponent<StreamingRecognizer>();
+        recognizer = GetComponent<StreamingRecognizer>();
         if (recognizer == null)
         {
             Debug.LogError("StreamingRecognizer component not found!");
             return;
-        }*/
+        }
 
        // Find the TextHelloWomen object directly
     GameObject helloWomenObject = GameObject.Find("HelloWomenText");
