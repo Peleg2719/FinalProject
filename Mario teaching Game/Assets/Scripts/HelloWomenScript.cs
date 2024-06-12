@@ -12,6 +12,7 @@ public class HelloWomenScript : MonoBehaviour
     public AudioClip dialogueAudioClip; // The audio clip to play initially
     public AudioClip responseAudioClip; // The audio clip to play after correct response
     private AudioSource audioSource; // AudioSource to play the audio
+    private bool passedAlready = false; 
 
     void Start()
     {
@@ -61,12 +62,12 @@ public class HelloWomenScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && passedAlready == false)
         {
             Debug.Log("Player entered trigger area.");
             if (dialogManager != null)
             {
-                dialogueText.text = "Hey Mario, How are you?\n Say:\n I'm fine thank you, how are you?";
+                dialogueText.text = "Hey Mario, How are you?\n\n Say:\n I'm fine thank you, how are you?";
                 dialogManager.ShowDialog();
 
                 if (dialogueAudioClip != null && audioSource != null)
@@ -103,7 +104,7 @@ public class HelloWomenScript : MonoBehaviour
         if (dialogueText != null && text.Trim().ToLower() == "i'm fine thank you how are you")
         {
             Debug.Log("Correct speech recognized.");
-
+            passedAlready = true;
             dialogueText.color = Color.red;
 
             // Play the response audio clip and hide the dialog after it finishes
