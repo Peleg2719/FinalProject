@@ -5702,6 +5702,7 @@ MonoBehaviour:
   dialogManager: {fileID: 1097772607}
   dialogueAudioClip: {fileID: 8300000, guid: 7a27772c8af6a2142a3c95e8c89b7173, type: 3}
   responseAudioClip: {fileID: 8300000, guid: 25b37a05511e7904dbdb36e065e07222, type: 3}
+  notSuccessResponseAudioClip: {fileID: 8300000, guid: d34eb322437b91d4e99404c2b580d520, type: 3}
 --- !u!114 &957508563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5741,7 +5742,8 @@ MonoBehaviour:
   onInterimResult:
     m_PersistentCalls:
       m_Calls: []
-  _microphoneName: Microphone (Realtek(R) Audio)
+  _microphoneName: "Microphone Array (\u05D8\u05DB\u05E0\u05D5\u05DC\u05D5\u05D2\u05D9\u05D9\u05EA
+    Intel\xAE Smart Sound)"
 --- !u!82 &957508564
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6226,6 +6228,7 @@ MonoBehaviour:
   dialogManager: {fileID: 0}
   dialogueAudioClip: {fileID: 0}
   responseAudioClip: {fileID: 0}
+  notSuccessResponseAudioClip: {fileID: 0}
 --- !u!1001 &1050009347
 PrefabInstance:
   m_ObjectHideFlags: 0

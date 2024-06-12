@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using GoogleCloudStreamingSpeechToText;
 using TMPro;
 using System.Collections;
+using System.Threading;
 
 public class HelloWomenScript : MonoBehaviour
 {
@@ -11,8 +12,9 @@ public class HelloWomenScript : MonoBehaviour
     private StreamingRecognizer recognizer;
     public AudioClip dialogueAudioClip; // The audio clip to play initially
     public AudioClip responseAudioClip; // The audio clip to play after correct response
+    public AudioClip notSuccessResponseAudioClip; // Audio clip for incorrect response
     private AudioSource audioSource; // AudioSource to play the audio
-    private bool passedAlready = false; 
+    private bool passedAlready = false;
 
     void Start()
     {
@@ -28,12 +30,12 @@ public class HelloWomenScript : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Text component not found on GameObject with name 'TextHelloWomen'.");
+                Debug.LogError("Text component not found on GameObject with name 'HelloWomenText'.");
             }
         }
         else
         {
-            Debug.LogError("GameObject with name 'TextHelloWomen' not found in the scene.");
+            Debug.LogError("GameObject with name 'HelloWomenText' not found in the scene.");
         }
 
         dialogManager = FindObjectOfType<DialogManager>();
@@ -62,32 +64,25 @@ public class HelloWomenScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && passedAlready == false)
+        if (other.CompareTag("Player") && !passedAlready)
         {
             Debug.Log("Player entered trigger area.");
             if (dialogManager != null)
             {
                 dialogueText.text = "Hey Mario, How are you?\n\n Say:\n I'm fine thank you, how are you?";
+                dialogueText.fontSize=30;
+                
                 dialogManager.ShowDialog();
 
                 if (dialogueAudioClip != null && audioSource != null)
                 {
                     audioSource.clip = dialogueAudioClip;
                     audioSource.Play(); // Play the initial audio clip
+                    StartCoroutine(StartListeningAfterAudio());
                 }
                 else
                 {
                     Debug.LogError("Initial audio clip or audio source is missing!");
-                }
-
-                if (recognizer != null)
-                {
-                    recognizer.onFinalResult.AddListener(OnSpeechRecognized);
-                    recognizer.StartListening();
-                }
-                else
-                {
-                    Debug.LogError("Recognizer is null when Player enters trigger area.");
                 }
             }
             else
@@ -97,11 +92,27 @@ public class HelloWomenScript : MonoBehaviour
         }
     }
 
+    IEnumerator StartListeningAfterAudio()
+    {
+        // Wait until the initial audio clip finishes playing
+        yield return new WaitWhile(() => audioSource.isPlaying);
+
+        if (recognizer != null)
+        {
+            recognizer.onFinalResult.AddListener(OnSpeechRecognized);
+            recognizer.StartListening();
+        }
+        else
+        {
+            Debug.LogError("Recognizer is null when trying to start listening.");
+        }
+    }
+
     void OnSpeechRecognized(string text)
     {
         Debug.Log("Speech Recognized: " + text);
 
-        if (dialogueText != null && text.Trim().ToLower() == "i'm fine thank you how are you")
+        if (dialogueText != null && (text.Trim().ToLower()=="i'm fine thank you how are you"||text.Trim().ToLower()=="i am fine thank you how are you" ))
         {
             Debug.Log("Correct speech recognized.");
             passedAlready = true;
@@ -120,14 +131,32 @@ public class HelloWomenScript : MonoBehaviour
                 Debug.LogError("Response audio clip or audio source is missing!");
             }
         }
-        else if (dialogueText == null)
-        {
-            Debug.LogError("dialogueText is null in OnSpeechRecognized.");
-        }
         else
         {
-            Debug.Log("Speech did not match expected response.");
+            text.Replace("i am","i'm");
+            var playerText = text.Split(" ");
+            var expectedText= "i'm fine thank you how are you";
+            var expectedTextArr=expectedText.Split(" ");
+      
+            int count = 0;
+            foreach (string s in playerText)
+            {
+                if (expectedText.Contains(s))
+                {
+                    count++;
+                }
+            }
+            var percentAccuracy = (float)count / expectedTextArr.Length;
+            dialogueText.text = $"Your Score: {percentAccuracy * 100}%";
+            Debug.Log($"Speech did not match expected response: {text}.");
+            Debug.Log("Playing not successful response audio clip.");
+            Thread.Sleep(1000);
+            audioSource.clip = notSuccessResponseAudioClip;
+            audioSource.Play();
+            StartCoroutine(HideDialogAfterAudio());
         }
+
+        recognizer.StopListening();
     }
 
     IEnumerator HideDialogAfterAudio()
