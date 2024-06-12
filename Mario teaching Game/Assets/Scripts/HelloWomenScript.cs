@@ -116,7 +116,8 @@ public class HelloWomenScript : MonoBehaviour
         {
             Debug.Log("Correct speech recognized.");
             passedAlready = true;
-            dialogueText.color = Color.red;
+            dialogueText.text = "You said it perfectly!";
+            dialogueText.color = Color.green;
 
             // Play the response audio clip and hide the dialog after it finishes
             if (responseAudioClip != null && audioSource != null)
@@ -147,7 +148,8 @@ public class HelloWomenScript : MonoBehaviour
                 }
             }
             var percentAccuracy = (float)count / expectedTextArr.Length;
-            dialogueText.text = $"Your Score: {percentAccuracy * 100}%";
+            int percentAccuracyInt = Mathf.RoundToInt(percentAccuracy * 100);
+            dialogueText.text = $"Your Score: {percentAccuracyInt}%";
             Debug.Log($"Speech did not match expected response: {text}.");
             Debug.Log("Playing not successful response audio clip.");
             Thread.Sleep(1000);
