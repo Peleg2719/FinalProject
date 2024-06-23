@@ -9,15 +9,22 @@ public class HelloWomenScript : MonoBehaviour
 {
     public TMP_Text dialogueText; // Reference TMP_Text dialogueText; Assign this in the Unity Editor
     public DialogManager dialogManager;
+  
     private StreamingRecognizer recognizer;
     public AudioClip dialogueAudioClip; // The audio clip to play initially
     public AudioClip responseAudioClip; // The audio clip to play after correct response
     public AudioClip notSuccessResponseAudioClip; // Audio clip for incorrect response
     private AudioSource audioSource; // AudioSource to play the audio
+    public ChangImage changeImage;
+     
+    public Image image;
     private bool passedAlready = false;
 
     void Start()
     {
+ 
+        
+
         // Find the TextHelloWomen object directly
         GameObject helloWomenObject = GameObject.Find("HelloWomenText");
         if (helloWomenObject != null)
@@ -99,6 +106,7 @@ public class HelloWomenScript : MonoBehaviour
 
         if (recognizer != null)
         {
+            changeImage.ChangeImageSpriteToRecord();
             recognizer.onFinalResult.AddListener(OnSpeechRecognized);
             recognizer.StartListening();
         }
@@ -157,7 +165,7 @@ public class HelloWomenScript : MonoBehaviour
             audioSource.Play();
             StartCoroutine(HideDialogAfterAudio());
         }
-
+        changeImage.ChangeImageSpriteToNotRecord();
         recognizer.StopListening();
     }
 
@@ -182,6 +190,7 @@ public class HelloWomenScript : MonoBehaviour
     {
         if (recognizer != null)
         {
+            changeImage.ChangeImageSpriteToNotRecord();
             recognizer.StopListening();
             recognizer.onFinalResult.RemoveListener(OnSpeechRecognized);
         }

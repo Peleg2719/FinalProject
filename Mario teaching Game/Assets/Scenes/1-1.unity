@@ -473,6 +473,107 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+--- !u!1 &50482670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 50482674}
+  - component: {fileID: 50482673}
+  - component: {fileID: 50482672}
+  - component: {fileID: 50482671}
+  m_Layer: 5
+  m_Name: MicrophoneCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &50482671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50482670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &50482672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50482670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &50482673
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50482670}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &50482674
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50482670}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1511132662}
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!4 &58214313 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3249715635291859842, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
@@ -3884,7 +3985,8 @@ MonoBehaviour:
   onInterimResult:
     m_PersistentCalls:
       m_Calls: []
-  _microphoneName: Microphone (Realtek(R) Audio)
+  _microphoneName: "Microphone Array (\u05D8\u05DB\u05E0\u05D5\u05DC\u05D5\u05D2\u05D9\u05D9\u05EA
+    Intel\xAE Smart Sound)"
 --- !u!114 &712853455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3927,7 +4029,8 @@ MonoBehaviour:
   onInterimResult:
     m_PersistentCalls:
       m_Calls: []
-  _microphoneName: Microphone (Realtek(R) Audio)
+  _microphoneName: "Microphone Array (\u05D8\u05DB\u05E0\u05D5\u05DC\u05D5\u05D2\u05D9\u05D9\u05EA
+    Intel\xAE Smart Sound)"
 --- !u!82 &712853457
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5703,6 +5806,8 @@ MonoBehaviour:
   dialogueAudioClip: {fileID: 8300000, guid: 7a27772c8af6a2142a3c95e8c89b7173, type: 3}
   responseAudioClip: {fileID: 8300000, guid: 25b37a05511e7904dbdb36e065e07222, type: 3}
   notSuccessResponseAudioClip: {fileID: 8300000, guid: d34eb322437b91d4e99404c2b580d520, type: 3}
+  changeImage: {fileID: 1787932351}
+  image: {fileID: 0}
 --- !u!114 &957508563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6229,6 +6334,8 @@ MonoBehaviour:
   dialogueAudioClip: {fileID: 0}
   responseAudioClip: {fileID: 0}
   notSuccessResponseAudioClip: {fileID: 0}
+  changeImage: {fileID: 0}
+  image: {fileID: 0}
 --- !u!1001 &1050009347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8990,6 +9097,113 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1608766419925849805, guid: 6a040250f4d4cf84b8f2f873b2c338ab, type: 3}
   m_PrefabInstance: {fileID: 1510347057}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1511132661
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1511132662}
+  - component: {fileID: 1511132665}
+  - component: {fileID: 1511132664}
+  - component: {fileID: 1511132663}
+  - component: {fileID: 1511132666}
+  m_Layer: 5
+  m_Name: MicrophoneImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1511132662
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511132661}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 50482674}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1511132663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511132661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95399f1fd570bbd40bd33c515c839e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 519420031}
+  viewportPosition: {x: 0.5, y: 1, z: 0}
+--- !u!114 &1511132664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511132661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 3d8d6cf1a12603c41b3099fce9e49730, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1511132665
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511132661}
+  m_CullTransparentMesh: 1
+--- !u!114 &1511132666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511132661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ed884121f91b64abaaa16070d92a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageComponent: {fileID: 0}
+  Recording: {fileID: 21300000, guid: 37d611c3961e5554c8e9845ffab7c068, type: 3}
+  NotRecording: {fileID: 21300000, guid: 3d8d6cf1a12603c41b3099fce9e49730, type: 3}
 --- !u!1001 &1559625118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10462,6 +10676,53 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 962898cbc3d9ed649b7a54a9a408f125, type: 3}
+--- !u!1 &1787932350
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1787932352}
+  - component: {fileID: 1787932351}
+  m_Layer: 0
+  m_Name: ChangeImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1787932351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787932350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ed884121f91b64abaaa16070d92a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageComponent: {fileID: 1511132664}
+  Recording: {fileID: 21300000, guid: 37d611c3961e5554c8e9845ffab7c068, type: 3}
+  NotRecording: {fileID: 21300000, guid: 3d8d6cf1a12603c41b3099fce9e49730, type: 3}
+--- !u!4 &1787932352
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787932350}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.5, y: 6.5, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1793976868 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3249715635291859842, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
