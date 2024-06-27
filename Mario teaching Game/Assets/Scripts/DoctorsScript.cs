@@ -1,57 +1,58 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GoogleCloudStreamingSpeechToText;
 using TMPro;
-using System.Collections;
 using System.Threading;
-
-public class HelloWomenScript : MonoBehaviour
+public class DoctorsScript : MonoBehaviour
 {
     public TMP_Text dialogueText; // Reference TMP_Text dialogueText; Assign this in the Unity Editor
-    public DialogManager dialogManager;
-
+    public DialogManagerDoctor dialogManager;
     private StreamingRecognizer recognizer;
     public AudioClip dialogueAudioClip; // The audio clip to play initially
-    public AudioClip responseAudioClip; // The audio clip to play after correct response
-    public AudioClip notSuccessResponseAudioClip; // Audio clip for incorrect response
+    public AudioClip responseAudioBikeRider; // The audio clip to play after correct response
+    public AudioClip notSuccessResponseAudioClipBikeRider; // Audio clip for incorrect response
     private AudioSource audioSource; // AudioSource to play the audio
     public ChangImage changeImage;
-
     public Image image;
     private bool passedAlready = false;
 
     void Start()
     {
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-
-
-        // Find the TextHelloWomen object directly
-        GameObject helloWomenObject = GameObject.Find("HelloWomenText");
-        if (helloWomenObject != null)
+        // Find the DoctorText object directly
+        GameObject DoctorsText = GameObject.Find("DoctorsText");
+        if (DoctorsText != null)
         {
-            // Get the Text component from the HelloWomenText object
-            dialogueText = helloWomenObject.GetComponent<TMP_Text>();
+            // Get the TMP_Text component from the BikeRiderText object
+            dialogueText = DoctorsText.GetComponent<TMP_Text>();
             if (dialogueText != null)
             {
                 Debug.Log("Text component found and assigned successfully.");
             }
             else
             {
-                Debug.LogError("Text component not found on GameObject with name 'HelloWomenText'.");
+                Debug.LogError("TMP_Text component not found on GameObject with name 'DoctorsText'.");
             }
         }
         else
         {
-            Debug.LogError("GameObject with name 'HelloWomenText' not found in the scene.");
+            Debug.LogError("GameObject with name 'DoctorsText' not found in the scene.");
         }
 
-        dialogManager = FindObjectOfType<DialogManager>();
+        dialogManager = FindObjectOfType<DialogManagerDoctor>();
         if (dialogManager == null)
         {
             Debug.LogError("DialogManager not found in the scene!");
+        }
+        else
+        {
+            dialogManager.HideDialogPanel(); // Hide the dialog panel initially
         }
 
         // Initialize the AudioSource component
@@ -62,7 +63,7 @@ public class HelloWomenScript : MonoBehaviour
         }
         else
         {
-            Debug.LogError("No initial audio clip assigned!");
+            Debug.LogError("No initial audio source found or added!");
         }
 
         recognizer = FindObjectOfType<StreamingRecognizer>();
@@ -75,9 +76,8 @@ public class HelloWomenScript : MonoBehaviour
             Debug.Log("Player entered trigger area.");
             if (dialogManager != null)
             {
-                dialogueText.text = "Hey Mario, How are you?\n\n Say:\n I'm fine thank you, how are you?";
+                dialogueText.text = "Hi Mario, are you injured?\n\n Say: yes i fell and my arm is hurt";
                 dialogueText.fontSize = 30;
-
                 dialogManager.ShowDialog();
 
                 if (dialogueAudioClip != null && audioSource != null)
@@ -119,7 +119,8 @@ public class HelloWomenScript : MonoBehaviour
     {
         Debug.Log("Speech Recognized: " + text);
 
-        int percentAccuracyInt = LogicUtils.CalculateAccuracyPercentage("I'm fine thank you how are you", text);
+        int percentAccuracyInt = LogicUtils.CalculateAccuracyPercentage("yes i fell and my arm is hurt", text);
+
         if (dialogueText != null && percentAccuracyInt > 90)
         {
             Debug.Log("Correct speech recognized.");
@@ -128,10 +129,10 @@ public class HelloWomenScript : MonoBehaviour
             dialogueText.color = Color.green;
 
             // Play the response audio clip and hide the dialog after it finishes
-            if (responseAudioClip != null && audioSource != null)
+            if (responseAudioBikeRider != null && audioSource != null)
             {
                 Debug.Log("Playing response audio clip.");
-                audioSource.clip = responseAudioClip;
+                audioSource.clip = responseAudioBikeRider;
                 audioSource.Play();
                 StartCoroutine(HideDialogAfterAudio());
             }
@@ -147,9 +148,9 @@ public class HelloWomenScript : MonoBehaviour
             Debug.Log("Playing not successful response audio clip.");
 
             // Set the unsuccessful response audio clip and play it
-            if (notSuccessResponseAudioClip != null && audioSource != null)
+            if (notSuccessResponseAudioClipBikeRider != null && audioSource != null)
             {
-                audioSource.clip = notSuccessResponseAudioClip;
+                audioSource.clip = notSuccessResponseAudioClipBikeRider;
                 audioSource.Play();
                 StartCoroutine(HideDialogAfterAudio());
             }
