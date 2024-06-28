@@ -3,7 +3,7 @@ using GoogleCloudStreamingSpeechToText;
 
 public class VoiceMovement : MonoBehaviour
 {
-    private StreamingRecognizer recognizer;
+   /* private StreamingRecognizer recognizer;
     private Rigidbody2D rb;
     private Vector2 velocity;
     public bool jumping { get; private set; }
@@ -48,5 +48,5 @@ public class VoiceMovement : MonoBehaviour
         // Move the car backward by changing its velocity or position
         // Example: decrease the car's x position
         transform.position -= Vector3.right * moveSpeed;
-    }
+    }*/
 }

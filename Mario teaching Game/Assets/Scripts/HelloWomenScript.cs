@@ -173,6 +173,7 @@ public class HelloWomenScript : MonoBehaviour
         {
             Debug.Log("Hiding dialog panel.");
             dialogManager.HideDialogPanel();
+            OnDestroy();
         }
         else
         {

@@ -175,6 +175,7 @@ public class bikeriderscript : MonoBehaviour
         {
             Debug.Log("Hiding dialog panel.");
             dialogManager.HideDialogPanel();
+            OnDestroy();
         }
         else
         {

@@ -1966,6 +1966,7 @@ GameObject:
   - component: {fileID: 308159340}
   - component: {fileID: 308159344}
   - component: {fileID: 308159345}
+  - component: {fileID: 308159346}
   m_Layer: 2
   m_Name: BikeRider
   m_TagString: Untagged
@@ -2181,6 +2182,35 @@ MonoBehaviour:
   notSuccessResponseAudioClipBikeRider: {fileID: 8300000, guid: dc5977c2e5727c64d828d840d056510a, type: 3}
   changeImage: {fileID: 1787932351}
   image: {fileID: 0}
+--- !u!114 &308159346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308159339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f43be3dcef461f9ee3aa85dd4204bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startOnAwake: 1
+  returnInterimResults: 1
+  enableDebugLogging: 0
+  onStartListening:
+    m_PersistentCalls:
+      m_Calls: []
+  onStopListening:
+    m_PersistentCalls:
+      m_Calls: []
+  onFinalResult:
+    m_PersistentCalls:
+      m_Calls: []
+  onInterimResult:
+    m_PersistentCalls:
+      m_Calls: []
+  _microphoneName: "Microphone Array (\u05D8\u05DB\u05E0\u05D5\u05DC\u05D5\u05D2\u05D9\u05D9\u05EA
+    Intel\xAE Smart Sound)"
 --- !u!1001 &317109703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6670,7 +6700,8 @@ MonoBehaviour:
   onInterimResult:
     m_PersistentCalls:
       m_Calls: []
-  _microphoneName: Microphone (Realtek(R) Audio)
+  _microphoneName: "Microphone Array (\u05D8\u05DB\u05E0\u05D5\u05DC\u05D5\u05D2\u05D9\u05D9\u05EA
+    Intel\xAE Smart Sound)"
 --- !u!82 &957508564
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12525,6 +12556,7 @@ GameObject:
   - component: {fileID: 1862309871}
   - component: {fileID: 1862309874}
   - component: {fileID: 1862309875}
+  - component: {fileID: 1862309876}
   m_Layer: 2
   m_Name: Doctor
   m_TagString: Doctor
@@ -12740,6 +12772,35 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1862309876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862309870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f43be3dcef461f9ee3aa85dd4204bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startOnAwake: 1
+  returnInterimResults: 1
+  enableDebugLogging: 0
+  onStartListening:
+    m_PersistentCalls:
+      m_Calls: []
+  onStopListening:
+    m_PersistentCalls:
+      m_Calls: []
+  onFinalResult:
+    m_PersistentCalls:
+      m_Calls: []
+  onInterimResult:
+    m_PersistentCalls:
+      m_Calls: []
+  _microphoneName: "Microphone Array (\u05D8\u05DB\u05E0\u05D5\u05DC\u05D5\u05D2\u05D9\u05D9\u05EA
+    Intel\xAE Smart Sound)"
 --- !u!1001 &1862956031
 PrefabInstance:
   m_ObjectHideFlags: 0
