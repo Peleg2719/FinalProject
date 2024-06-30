@@ -1,19 +1,29 @@
 using System.Collections;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class BlockHit : MonoBehaviour
 {
     public GameObject item;
     public Sprite emptyBlock;
     public int maxHits = -1;
     private bool animating;
+     public TMP_Text pointsText; // Reference to the Text component displaying points
+    private int points = 0;
 
+
+      void Start()
+    {
+        UpdatePointsDisplay();
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!animating && maxHits != 0 && collision.gameObject.CompareTag("Player"))
         {
             if (collision.transform.DotTest(transform, Vector2.up)) {
                 Hit();
+                 points++;
+                 UpdatePointsDisplay();
             }
         }
     }
@@ -65,6 +75,10 @@ public class BlockHit : MonoBehaviour
         }
 
         transform.localPosition = to;
+    }
+      void UpdatePointsDisplay()
+    {
+        pointsText.text = points.ToString();
     }
 
 }
