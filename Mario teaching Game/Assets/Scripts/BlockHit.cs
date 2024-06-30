@@ -26,7 +26,7 @@ public class BlockHit : MonoBehaviour
                 Hit();
             if (item.name.Equals("BlockCoin")) // Make sure "BlockCoin" is the name of the coin prefab
             {
-                pointCounter.UpdateCoin();
+                pointCounter.UpdateCoin(1);
             }
                 
                  

@@ -9,7 +9,7 @@ public class HelloWomenScript : MonoBehaviour
 {
     public TMP_Text dialogueText; // Reference TMP_Text dialogueText; Assign this in the Unity Editor
     public DialogManager dialogManager;
-
+    public PointCounter pointCounter;
     private StreamingRecognizer recognizer;
     public AudioClip dialogueAudioClip; // The audio clip to play initially
     public AudioClip responseAudioClip; // The audio clip to play after correct response
@@ -126,6 +126,7 @@ public class HelloWomenScript : MonoBehaviour
             passedAlready = true;
             dialogueText.text = "You said it perfectly!";
             dialogueText.color = Color.green;
+            pointCounter.UpdateCoin(5);
 
             // Play the response audio clip and hide the dialog after it finishes
             if (responseAudioClip != null && audioSource != null)
@@ -152,13 +153,14 @@ public class HelloWomenScript : MonoBehaviour
                 audioSource.clip = notSuccessResponseAudioClip;
                 audioSource.Play();
                 StartCoroutine(HideDialogAfterAudio());
+                pointCounter.UpdateCoin(-1);
             }
             else
             {
                 Debug.LogError("Unsuccessful response audio clip or audio source is missing!");
             }
         }
-
+        
         changeImage.ChangeImageSpriteToNotRecord();
         recognizer.StopListening();
     }

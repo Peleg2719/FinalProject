@@ -15,17 +15,17 @@ public class PointCounter : MonoBehaviour
         UpdatePointsDisplay();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+   /* void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             points++;
             UpdatePointsDisplay();
         }
-    }
-    public void UpdateCoin()
+    }*/
+    public void UpdateCoin(int pointCount)
     {
-            points++;
+            points+=pointCount;
             UpdatePointsDisplay();
     }
 
