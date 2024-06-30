@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using GoogleCloudStreamingSpeechToText;
 using TMPro;
-using System.Threading;
-public class DoctorsScript : MonoBehaviour
+
+public class CoffeSellerScript : MonoBehaviour
 {
-    public TMP_Text dialogueText; // Reference TMP_Text dialogueText; Assign this in the Unity Editor
-    public DialogManagerDoctor dialogManager;
+   public TMP_Text dialogueText; // Reference TMP_Text dialogueText; Assign this in the Unity Editor
+    public DialogManagerCoffeSeller dialogManager;
     private StreamingRecognizer recognizer;
     public AudioClip dialogueAudioClip; // The audio clip to play initially
-    public AudioClip responseAudioDoctor; // The audio clip to play after correct response
-    public AudioClip notSuccessResponseAudioClipDoctor; // Audio clip for incorrect response
+    public AudioClip responseAudioCoffeSeller; // The audio clip to play after correct response
+    public AudioClip notSuccessResponseAudioClipCoffeSeller; // Audio clip for incorrect response
     private AudioSource audioSource; // AudioSource to play the audio
     public ChangImage changeImage;
     public Image image;
@@ -26,7 +26,7 @@ public class DoctorsScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         // Find the DoctorText object directly
-        GameObject DoctorsText = GameObject.Find("DoctorsText");
+        GameObject DoctorsText = GameObject.Find("CoffeSellerText");
         if (DoctorsText != null)
         {
             // Get the TMP_Text component from the BikeRiderText object
@@ -37,15 +37,15 @@ public class DoctorsScript : MonoBehaviour
             }
             else
             {
-                Debug.LogError("TMP_Text component not found on GameObject with name 'DoctorsText'.");
+                Debug.LogError("TMP_Text component not found on GameObject with name 'CoffeSellerText'.");
             }
         }
         else
         {
-            Debug.LogError("GameObject with name 'DoctorsText' not found in the scene.");
+            Debug.LogError("GameObject with name 'CoffeSellerText' not found in the scene.");
         }
 
-        dialogManager = FindObjectOfType<DialogManagerDoctor>();
+        dialogManager = FindObjectOfType<DialogManagerCoffeSeller>();
         if (dialogManager == null)
         {
             Debug.LogError("DialogManager not found in the scene!");
@@ -76,7 +76,7 @@ public class DoctorsScript : MonoBehaviour
             Debug.Log("Player entered trigger area.");
             if (dialogManager != null)
             {
-                dialogueText.text = "Hi Mario, are you injured?\n\n Say: yes i fell and my arm is hurt";
+                dialogueText.text = "Hi mario what would you like to order?\n\n Say: I would love a fat-free coffee, please!";
                 dialogueText.fontSize = 30;
                 dialogManager.ShowDialog();
 
@@ -119,7 +119,7 @@ public class DoctorsScript : MonoBehaviour
     {
         Debug.Log("Speech Recognized: " + text);
 
-        int percentAccuracyInt = LogicUtils.CalculateAccuracyPercentage("yes i fell and my arm is hurt", text);
+        int percentAccuracyInt = LogicUtils.CalculateAccuracyPercentage("I would love a fat free coffee please", text);
 
         if (dialogueText != null && percentAccuracyInt > 90)
         {
@@ -129,10 +129,10 @@ public class DoctorsScript : MonoBehaviour
             dialogueText.color = Color.green;
 
             // Play the response audio clip and hide the dialog after it finishes
-            if (responseAudioDoctor != null && audioSource != null)
+            if (responseAudioCoffeSeller != null && audioSource != null)
             {
                 Debug.Log("Playing response audio clip.");
-                audioSource.clip = responseAudioDoctor;
+                audioSource.clip = responseAudioCoffeSeller;
                 audioSource.Play();
                 StartCoroutine(HideDialogAfterAudio());
             }
@@ -148,9 +148,9 @@ public class DoctorsScript : MonoBehaviour
             Debug.Log("Playing not successful response audio clip.");
 
             // Set the unsuccessful response audio clip and play it
-            if (notSuccessResponseAudioClipDoctor != null && audioSource != null)
+            if (notSuccessResponseAudioClipCoffeSeller != null && audioSource != null)
             {
-                audioSource.clip = notSuccessResponseAudioClipDoctor;
+                audioSource.clip = notSuccessResponseAudioClipCoffeSeller;
                 audioSource.Play();
                 StartCoroutine(HideDialogAfterAudio());
             }
