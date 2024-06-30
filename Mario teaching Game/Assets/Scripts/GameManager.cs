@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
+using GoogleCloudStreamingSpeechToText;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
+    
     public static bool isGamePaused = false;
     public static GameManager Instance { get; private set; }
     public bool isOKButtonClicked = false;
@@ -100,6 +103,7 @@ public class GameManager : MonoBehaviour
             coins = 0;
             AddLife();
         }
+       
     }
 
     public void AddLife()

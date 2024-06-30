@@ -995,6 +995,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointsText
+      value: 
+      objectReference: {fileID: 938507568}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointCounter
+      value: 
+      objectReference: {fileID: 199801318}
     - target: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
       propertyPath: m_Name
       value: Mystery Block (Coin)
@@ -1322,6 +1330,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 481021467160599389, guid: d83a5e7863a8afc4faee91819fff1fa7, type: 3}
   m_PrefabInstance: {fileID: 481021466993011483}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &199801317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 199801319}
+  - component: {fileID: 199801318}
+  m_Layer: 0
+  m_Name: PointCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &199801318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199801317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
+--- !u!4 &199801319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199801317}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &219273765
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,6 +2140,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5569433547154846709, guid: 110c2f3946049df40861b9180bd81f77, type: 3}
   m_PrefabInstance: {fileID: 291426614}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &304188887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+  m_PrefabInstance: {fileID: 1166897428}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &304188891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304188887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
 --- !u!1 &308159339
 GameObject:
   m_ObjectHideFlags: 0
@@ -2974,6 +3045,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4953937513092463113, guid: ae74545fba894724092dcceb2c7895ac, type: 3}
   m_PrefabInstance: {fileID: 474586437}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &475482014 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+  m_PrefabInstance: {fileID: 643371517}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &504752283 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+  m_PrefabInstance: {fileID: 2103449903}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &504752287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504752283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
 --- !u!1001 &505259444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4219,6 +4313,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointsText
+      value: 
+      objectReference: {fileID: 938507568}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointCounter
+      value: 
+      objectReference: {fileID: 199801318}
     - target: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
       propertyPath: m_Name
       value: Mystery Block (Coin)
@@ -4693,6 +4795,11 @@ Transform:
   m_Father: {fileID: 847584414}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &711454217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+  m_PrefabInstance: {fileID: 1086514104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &712853452
 GameObject:
   m_ObjectHideFlags: 0
@@ -6127,6 +6234,11 @@ Transform:
   m_Father: {fileID: 847584414}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &875991661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+  m_PrefabInstance: {fileID: 1808008679}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &881969506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7668,7 +7780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519420031}
-  viewportPosition: {x: 850, y: 355, z: 0}
+  viewportPosition: {x: 800, y: 355, z: 0}
 --- !u!114 &1035339574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8138,6 +8250,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointsText
+      value: 
+      objectReference: {fileID: 938507568}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointCounter
+      value: 
+      objectReference: {fileID: 199801318}
     - target: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
       propertyPath: m_Name
       value: Mystery Block (Coin)
@@ -8671,6 +8791,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointsText
+      value: 
+      objectReference: {fileID: 938507568}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointCounter
+      value: 
+      objectReference: {fileID: 199801318}
     - target: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
       propertyPath: m_Name
       value: Mystery Block (Coin)
@@ -8806,6 +8934,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3249715635291859842, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
   m_PrefabInstance: {fileID: 1086514104}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1179062232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711454217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
 --- !u!1001 &1187592080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9852,6 +9993,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 962898cbc3d9ed649b7a54a9a408f125, type: 3}
+--- !u!1 &1351565524 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+  m_PrefabInstance: {fileID: 1427757814}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1351565528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351565524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
 --- !u!1001 &1358594441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10395,6 +10554,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointsText
+      value: 
+      objectReference: {fileID: 938507568}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointCounter
+      value: 
+      objectReference: {fileID: 199801318}
     - target: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
       propertyPath: m_Name
       value: Mystery Block (Coin)
@@ -11993,6 +12160,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3249715635291859842, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
   m_PrefabInstance: {fileID: 1808008679}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1622166667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875991661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
 --- !u!1001 &1638122169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12112,6 +12292,42 @@ Transform:
   m_Father: {fileID: 712853453}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1646165255 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+  m_PrefabInstance: {fileID: 2121510963}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1646165259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646165255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
+--- !u!1 &1648045783 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+  m_PrefabInstance: {fileID: 2051644703}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1648045787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648045783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
 --- !u!1001 &1655158056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12311,6 +12527,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8150361788633858316, guid: 2f5de5a0734d0804fba7b30c7e01d44c, type: 3}
   m_PrefabInstance: {fileID: 1678496348}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1684658005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+  m_PrefabInstance: {fileID: 1964611444}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1687396619 stripped
 Transform:
@@ -13134,6 +13355,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3249715635291859842, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
   m_PrefabInstance: {fileID: 643371517}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1793976872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475482014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
 --- !u!1001 &1803839408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13251,6 +13485,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointsText
+      value: 
+      objectReference: {fileID: 938507568}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointCounter
+      value: 
+      objectReference: {fileID: 199801318}
     - target: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
       propertyPath: m_Name
       value: Mystery Block (Coin)
@@ -14862,6 +15104,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3249715635291859842, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
   m_PrefabInstance: {fileID: 1964611444}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1933670359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684658005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
 --- !u!1001 &1952295175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15101,6 +15356,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointsText
+      value: 
+      objectReference: {fileID: 938507568}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointCounter
+      value: 
+      objectReference: {fileID: 199801318}
     - target: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
       propertyPath: m_Name
       value: Mystery Block (Coin)
@@ -15668,6 +15931,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointsText
+      value: 
+      objectReference: {fileID: 938507568}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointCounter
+      value: 
+      objectReference: {fileID: 199801318}
     - target: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
       propertyPath: m_Name
       value: Mystery Block (Coin)
@@ -15831,6 +16102,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointsText
+      value: 
+      objectReference: {fileID: 938507568}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointCounter
+      value: 
+      objectReference: {fileID: 199801318}
     - target: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
       propertyPath: m_Name
       value: Mystery Block (Coin)
@@ -16046,6 +16325,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointsText
+      value: 
+      objectReference: {fileID: 938507568}
+    - target: {fileID: 5197151675358696834, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
+      propertyPath: pointCounter
+      value: 
+      objectReference: {fileID: 199801318}
     - target: {fileID: 9166230116066908815, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
       propertyPath: m_Name
       value: Mystery Block (Coin)

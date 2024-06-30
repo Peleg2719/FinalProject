@@ -8,13 +8,15 @@ public class BlockHit : MonoBehaviour
     public Sprite emptyBlock;
     public int maxHits = -1;
     private bool animating;
+    
      public TMP_Text pointsText; // Reference to the Text component displaying points
-    private int points = 0;
+
+    public PointCounter pointCounter;
 
 
       void Start()
     {
-        UpdatePointsDisplay();
+        UpdatePointsDisplayOnStart();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -22,8 +24,12 @@ public class BlockHit : MonoBehaviour
         {
             if (collision.transform.DotTest(transform, Vector2.up)) {
                 Hit();
-                 points++;
-                 UpdatePointsDisplay();
+            if (item.name.Equals("BlockCoin")) // Make sure "BlockCoin" is the name of the coin prefab
+            {
+                pointCounter.UpdateCoin();
+            }
+                
+                 
             }
         }
     }
@@ -76,9 +82,9 @@ public class BlockHit : MonoBehaviour
 
         transform.localPosition = to;
     }
-      void UpdatePointsDisplay()
+      void UpdatePointsDisplayOnStart()
     {
-        pointsText.text = points.ToString();
+        pointsText.text = "0";
     }
 
 }

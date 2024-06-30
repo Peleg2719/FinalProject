@@ -8,8 +8,8 @@ using TMPro;
 public class PointCounter : MonoBehaviour
 {
     public TMP_Text pointsText; // Reference to the Text component displaying points
-    private int points = 0;
-
+    public static int points = 0;
+    
     void Start()
     {
         UpdatePointsDisplay();
@@ -22,6 +22,11 @@ public class PointCounter : MonoBehaviour
             points++;
             UpdatePointsDisplay();
         }
+    }
+    public void UpdateCoin()
+    {
+            points++;
+            UpdatePointsDisplay();
     }
 
     void UpdatePointsDisplay()
