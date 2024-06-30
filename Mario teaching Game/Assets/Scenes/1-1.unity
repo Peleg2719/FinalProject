@@ -11333,7 +11333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519420031}
-  viewportPosition: {x: 300, y: 350, z: 0}
+  viewportPosition: {x: 100, y: 350, z: 0}
 --- !u!114 &1511132664
 MonoBehaviour:
   m_ObjectHideFlags: 0
