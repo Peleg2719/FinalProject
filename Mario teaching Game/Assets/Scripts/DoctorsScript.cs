@@ -7,6 +7,7 @@ using TMPro;
 using System.Threading;
 public class DoctorsScript : MonoBehaviour
 {
+     public PointCounter pointCounter;
     public TMP_Text dialogueText; // Reference TMP_Text dialogueText; Assign this in the Unity Editor
     public DialogManagerDoctor dialogManager;
     private StreamingRecognizer recognizer;
@@ -127,6 +128,7 @@ public class DoctorsScript : MonoBehaviour
             passedAlready = true;
             dialogueText.text = "You said it perfectly!";
             dialogueText.color = Color.green;
+             pointCounter.UpdateCoin(5);
 
             // Play the response audio clip and hide the dialog after it finishes
             if (responseAudioDoctor != null && audioSource != null)
@@ -153,6 +155,7 @@ public class DoctorsScript : MonoBehaviour
                 audioSource.clip = notSuccessResponseAudioClipDoctor;
                 audioSource.Play();
                 StartCoroutine(HideDialogAfterAudio());
+                 pointCounter.UpdateCoin(-1);
             }
             else
             {

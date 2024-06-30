@@ -8,6 +8,7 @@ using System.Threading;
 
 public class bikeriderscript : MonoBehaviour
 {
+    public PointCounter pointCounter;
     public TMP_Text dialogueText; // Reference TMP_Text dialogueText; Assign this in the Unity Editor
     public BikeRiderDialogManager dialogManager;
     private StreamingRecognizer recognizer;
@@ -136,6 +137,7 @@ public class bikeriderscript : MonoBehaviour
                 audioSource.clip = responseAudioBikeRider;
                 audioSource.Play();
                 StartCoroutine(HideDialogAfterAudio());
+                  pointCounter.UpdateCoin(5);
             }
             else
             {
@@ -154,6 +156,7 @@ public class bikeriderscript : MonoBehaviour
                 audioSource.clip = notSuccessResponseAudioClipBikeRider;
                 audioSource.Play();
                 StartCoroutine(HideDialogAfterAudio());
+                  pointCounter.UpdateCoin(-1);
             }
             else
             {

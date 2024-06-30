@@ -2172,6 +2172,7 @@ GameObject:
   - component: {fileID: 308159344}
   - component: {fileID: 308159345}
   - component: {fileID: 308159346}
+  - component: {fileID: 308159347}
   m_Layer: 2
   m_Name: BikeRider
   m_TagString: Untagged
@@ -2380,6 +2381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d15ec1f32ad5d438664eaa1dddbd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointCounter: {fileID: 199801318}
   dialogueText: {fileID: 1550250912}
   dialogManager: {fileID: 1529094467}
   dialogueAudioClip: {fileID: 8300000, guid: ca8dcf69fbc86d14193c3aaede441d83, type: 3}
@@ -2416,6 +2418,19 @@ MonoBehaviour:
       m_Calls: []
   _microphoneName: "Microphone Array (\u05D8\u05DB\u05E0\u05D5\u05DC\u05D5\u05D2\u05D9\u05D9\u05EA
     Intel\xAE Smart Sound)"
+--- !u!114 &308159347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308159339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
 --- !u!1001 &317109703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7079,6 +7094,7 @@ GameObject:
   - component: {fileID: 957508562}
   - component: {fileID: 957508564}
   - component: {fileID: 957508563}
+  - component: {fileID: 957508565}
   m_Layer: 2
   m_Name: HelloWomen
   m_TagString: HelloWomen
@@ -7183,6 +7199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 565429187}
   dialogManager: {fileID: 1097772607}
+  pointCounter: {fileID: 199801318}
   dialogueAudioClip: {fileID: 8300000, guid: 7a27772c8af6a2142a3c95e8c89b7173, type: 3}
   responseAudioClip: {fileID: 8300000, guid: 25b37a05511e7904dbdb36e065e07222, type: 3}
   notSuccessResponseAudioClip: {fileID: 8300000, guid: d34eb322437b91d4e99404c2b580d520, type: 3}
@@ -7325,6 +7342,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &957508565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957508558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
 --- !u!1 &968703600
 GameObject:
   m_ObjectHideFlags: 0
@@ -7337,6 +7367,7 @@ GameObject:
   - component: {fileID: 968703602}
   - component: {fileID: 968703601}
   - component: {fileID: 968703604}
+  - component: {fileID: 968703605}
   m_Layer: 2
   m_Name: CoffeeSeller
   m_TagString: Untagged
@@ -7449,6 +7480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52749a5c4fe51f4093ade2f0f658a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointCounter: {fileID: 199801318}
   dialogueText: {fileID: 1746679280}
   dialogManager: {fileID: 2028913187}
   dialogueAudioClip: {fileID: 8300000, guid: cece9090399bb33438643885073d1f4a, type: 3}
@@ -7456,6 +7488,19 @@ MonoBehaviour:
   notSuccessResponseAudioClipCoffeSeller: {fileID: 8300000, guid: c80ecfd98bb01a7428a06c0045458fd7, type: 3}
   changeImage: {fileID: 1787932351}
   image: {fileID: 0}
+--- !u!114 &968703605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968703600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
 --- !u!4 &980084947 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3249715635291859842, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
@@ -7838,6 +7883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 0}
   dialogManager: {fileID: 0}
+  pointCounter: {fileID: 0}
   dialogueAudioClip: {fileID: 0}
   responseAudioClip: {fileID: 0}
   notSuccessResponseAudioClip: {fileID: 0}
@@ -10831,6 +10877,7 @@ GameObject:
   - component: {fileID: 1471177910}
   - component: {fileID: 1471177909}
   - component: {fileID: 1471177912}
+  - component: {fileID: 1471177913}
   m_Layer: 2
   m_Name: PoliceMan
   m_TagString: Untagged
@@ -10944,12 +10991,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 1212545800}
+  pointCounter: {fileID: 199801318}
   dialogManager: {fileID: 378284454}
   dialogueAudioClip: {fileID: 8300000, guid: 2cdf6d27245db4348870505dd19d8ef9, type: 3}
   responseAudioCop: {fileID: 8300000, guid: 7b8bff71f805e044fb68b03a108f7625, type: 3}
   notSuccessResponseAudioClipCop: {fileID: 8300000, guid: 357a3fbd9a2f3bd4eaa65e9b76996b14, type: 3}
   changeImage: {fileID: 1787932351}
   image: {fileID: 0}
+--- !u!114 &1471177913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471177908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
 --- !u!1001 &1476094723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13901,6 +13962,7 @@ GameObject:
   - component: {fileID: 1862309874}
   - component: {fileID: 1862309875}
   - component: {fileID: 1862309876}
+  - component: {fileID: 1862309877}
   m_Layer: 2
   m_Name: Doctor
   m_TagString: Doctor
@@ -14013,6 +14075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d5afde6af08bf148899c6ec8cf11f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointCounter: {fileID: 199801318}
   dialogueText: {fileID: 24381749}
   dialogManager: {fileID: 667347854}
   dialogueAudioClip: {fileID: 8300000, guid: 1efbae65e6ba8f44ca4f022e57bd2ab7, type: 3}
@@ -14145,6 +14208,19 @@ MonoBehaviour:
       m_Calls: []
   _microphoneName: "Microphone Array (\u05D8\u05DB\u05E0\u05D5\u05DC\u05D5\u05D2\u05D9\u05D9\u05EA
     Intel\xAE Smart Sound)"
+--- !u!114 &1862309877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862309870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86112ebe3cdf8f84f97806cd6587fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsText: {fileID: 938507568}
 --- !u!1001 &1862956031
 PrefabInstance:
   m_ObjectHideFlags: 0

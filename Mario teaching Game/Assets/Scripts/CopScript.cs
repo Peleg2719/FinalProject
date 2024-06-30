@@ -9,6 +9,7 @@ using System.Threading;
 public class CopScript : MonoBehaviour
 {
     public TMP_Text dialogueText; // Reference TMP_Text dialogueText; Assign this in the Unity Editor
+    public PointCounter pointCounter;
     public DialogManagerCopSCript dialogManager;
     private StreamingRecognizer recognizer;
     public AudioClip dialogueAudioClip; // The audio clip to play initially
@@ -128,6 +129,7 @@ public class CopScript : MonoBehaviour
             passedAlready = true;
             dialogueText.text = "You said it perfectly!";
             dialogueText.color = Color.green;
+            pointCounter.UpdateCoin(5);
 
             // Play the response audio clip and hide the dialog after it finishes
             if (responseAudioCop != null && audioSource != null)
@@ -154,6 +156,7 @@ public class CopScript : MonoBehaviour
                 audioSource.clip = notSuccessResponseAudioClipCop;
                 audioSource.Play();
                 StartCoroutine(HideDialogAfterAudio());
+                pointCounter.UpdateCoin(-1);
             }
             else
             {

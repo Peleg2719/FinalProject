@@ -12,7 +12,14 @@ public class PointCounter : MonoBehaviour
     
     void Start()
     {
+        ResetPoints();
         UpdatePointsDisplay();
+
+    }
+      public void ResetPoints()
+    {
+        points = 0;
+        UpdatePointsDisplay(); // Update display after resetting
     }
 
    /* void OnTriggerEnter2D(Collider2D other)
@@ -31,6 +38,7 @@ public class PointCounter : MonoBehaviour
 
     void UpdatePointsDisplay()
     {
+       
         pointsText.text = points.ToString();
     }
 }
