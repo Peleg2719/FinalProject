@@ -3,64 +3,33 @@ using UnityEngine.UI;
 using GoogleCloudStreamingSpeechToText;
 using TMPro;
 using System.Collections;
-using System.Threading;
 
 public class HelloWomenScript : MonoBehaviour
 {
-    public TMP_Text dialogueText; // Reference TMP_Text dialogueText; Assign this in the Unity Editor
+    public TMP_Text dialogueText;
     public DialogManager dialogManager;
     public PointCounter pointCounter;
     private StreamingRecognizer recognizer;
-    public AudioClip dialogueAudioClip; // The audio clip to play initially
-    public AudioClip responseAudioClip; // The audio clip to play after correct response
-    public AudioClip notSuccessResponseAudioClip; // Audio clip for incorrect response
-    private AudioSource audioSource; // AudioSource to play the audio
+    public AudioClip dialogueAudioClip;
+    public AudioClip responseAudioClip;
+    public AudioClip notSuccessResponseAudioClip;
+    private AudioSource audioSource;
     public ChangImage changeImage;
-
     public Image image;
     private bool passedAlready = false;
+    private FirebaseManager firebaseManager;
+    private string expectedAnswer;
 
     void Start()
     {
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-
-
-        // Find the TextHelloWomen object directly
-        GameObject helloWomenObject = GameObject.Find("HelloWomenText");
-        if (helloWomenObject != null)
+        firebaseManager = FindObjectOfType<FirebaseManager>();
+        if (firebaseManager == null)
         {
-            // Get the Text component from the HelloWomenText object
-            dialogueText = helloWomenObject.GetComponent<TMP_Text>();
-            if (dialogueText != null)
-            {
-                Debug.Log("Text component found and assigned successfully.");
-            }
-            else
-            {
-                Debug.LogError("Text component not found on GameObject with name 'HelloWomenText'.");
-            }
-        }
-        else
-        {
-            Debug.LogError("GameObject with name 'HelloWomenText' not found in the scene.");
+            Debug.LogError("FirebaseManager not found in the scene!");
         }
 
-        dialogManager = FindObjectOfType<DialogManager>();
-        if (dialogManager == null)
-        {
-            Debug.LogError("DialogManager not found in the scene!");
-        }
-
-        // Initialize the AudioSource component
         audioSource = gameObject.AddComponent<AudioSource>();
-        if (dialogueAudioClip != null)
-        {
-            audioSource.clip = dialogueAudioClip;
-        }
-        else
+        if (dialogueAudioClip == null)
         {
             Debug.LogError("No initial audio clip assigned!");
         }
@@ -70,37 +39,58 @@ public class HelloWomenScript : MonoBehaviour
         {
             Debug.LogError("StreamingRecognizer component not found!");
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
         if (other.CompareTag("Player") && !passedAlready)
         {
             Debug.Log("Player entered trigger area.");
-            if (dialogManager != null)
+            if (dialogManager != null && firebaseManager != null)
             {
-                dialogueText.text = "Hey Mario, How are you?\n\n Say:\n I'm fine thank you, how are you?";
-                dialogueText.fontSize = 30;
-
-                dialogManager.ShowDialog();
-
-                if (dialogueAudioClip != null && audioSource != null)
-                {
-                    audioSource.clip = dialogueAudioClip;
-                    audioSource.Play(); // Play the initial audio clip
-                    StartCoroutine(StartListeningAfterAudio());
-                }
-                else
-                {
-                    Debug.LogError("Initial audio clip or audio source is missing!");
-                }
+                StartCoroutine(FetchQuestionData());
             }
             else
             {
-                Debug.LogError("DialogManager is null when Player enters trigger area.");
+                Debug.LogError("DialogManager or FirebaseManager is null when Player enters trigger area.");
             }
+        }
+    }
+
+    private IEnumerator FetchQuestionData()
+    {
+        yield return StartCoroutine(firebaseManager.GetQuestionData("question_1", OnQuestionDataReceived));
+    }
+
+    private void OnQuestionDataReceived(QuestionData questionData)
+    {
+        if (questionData != null)
+        {
+            dialogueText.text = questionData.question + "\n\nSay:\n" + questionData.answer;
+            dialogueText.fontSize = 30;
+            expectedAnswer = questionData.answer;
+
+            dialogManager.ShowDialog();
+
+            if (dialogueAudioClip != null && audioSource != null)
+            {
+                audioSource.clip = dialogueAudioClip;
+                audioSource.Play();
+                StartCoroutine(StartListeningAfterAudio());
+            }
+            else
+            {
+                Debug.LogError("Initial audio clip or audio source is missing!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to retrieve question data from Firebase.");
         }
     }
 
     IEnumerator StartListeningAfterAudio()
     {
-        // Wait until the initial audio clip finishes playing
         yield return new WaitWhile(() => audioSource.isPlaying);
 
         if (recognizer != null)
@@ -119,8 +109,8 @@ public class HelloWomenScript : MonoBehaviour
     {
         Debug.Log("Speech Recognized: " + text);
 
-        int percentAccuracyInt = LogicUtils.CalculateAccuracyPercentage("I'm fine thank you how are you", text);
-        if (dialogueText != null && percentAccuracyInt > 90)
+        int percentAccuracyInt = LogicUtils.CalculateAccuracyPercentage(expectedAnswer, text);
+        if (dialogueText != null && percentAccuracyInt > 80)
         {
             Debug.Log("Correct speech recognized.");
             passedAlready = true;
@@ -128,7 +118,6 @@ public class HelloWomenScript : MonoBehaviour
             dialogueText.color = Color.green;
             pointCounter.UpdateCoin(5);
 
-            // Play the response audio clip and hide the dialog after it finishes
             if (responseAudioClip != null && audioSource != null)
             {
                 Debug.Log("Playing response audio clip.");
@@ -147,7 +136,6 @@ public class HelloWomenScript : MonoBehaviour
             Debug.Log($"Speech did not match expected response: {text}.");
             Debug.Log("Playing not successful response audio clip.");
 
-            // Set the unsuccessful response audio clip and play it
             if (notSuccessResponseAudioClip != null && audioSource != null)
             {
                 audioSource.clip = notSuccessResponseAudioClip;
@@ -160,14 +148,13 @@ public class HelloWomenScript : MonoBehaviour
                 Debug.LogError("Unsuccessful response audio clip or audio source is missing!");
             }
         }
-        
+
         changeImage.ChangeImageSpriteToNotRecord();
         recognizer.StopListening();
     }
 
     IEnumerator HideDialogAfterAudio()
     {
-        // Wait until the audio clip finishes playing
         Debug.Log("Waiting for audio clip to finish playing.");
         yield return new WaitWhile(() => audioSource.isPlaying);
 
