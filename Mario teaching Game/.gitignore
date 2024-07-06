@@ -2,7 +2,7 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-Mario teaching Game/Assets/StreamingAssets/gcp_credentials.json
+
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
