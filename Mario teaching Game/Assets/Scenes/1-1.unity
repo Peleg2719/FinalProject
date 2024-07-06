@@ -4466,6 +4466,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8150361788633858316, guid: 2f5de5a0734d0804fba7b30c7e01d44c, type: 3}
   m_PrefabInstance: {fileID: 654401582}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &665550970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 665550972}
+  - component: {fileID: 665550971}
+  m_Layer: 0
+  m_Name: FirebaseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &665550971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665550970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5e2ee31c24a944591a8fb19d3a37db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questiondata:
+    character_name: 
+    question: 
+    answer: 
+    level: 0
+  userData:
+    username: 
+    password: 
+    score: 0
+--- !u!4 &665550972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665550970}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.535006, y: 8.386647, z: 5.008028}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &667347853
 GameObject:
   m_ObjectHideFlags: 0
