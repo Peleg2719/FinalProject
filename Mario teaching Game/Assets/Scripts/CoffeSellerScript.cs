@@ -1,70 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GoogleCloudStreamingSpeechToText;
 using TMPro;
+using System.Collections;
 
 public class CoffeSellerScript : MonoBehaviour
 {
-    public PointCounter pointCounter;
-   public TMP_Text dialogueText; // Reference TMP_Text dialogueText; Assign this in the Unity Editor
+    public TMP_Text dialogueText;
     public DialogManagerCoffeSeller dialogManager;
+    public PointCounter pointCounter;
     private StreamingRecognizer recognizer;
-    public AudioClip dialogueAudioClip; // The audio clip to play initially
-    public AudioClip responseAudioCoffeSeller; // The audio clip to play after correct response
-    public AudioClip notSuccessResponseAudioClipCoffeSeller; // Audio clip for incorrect response
-    private AudioSource audioSource; // AudioSource to play the audio
+    public AudioClip dialogueAudioClip;
+    public AudioClip responseAudioCoffeSeller;
+    public AudioClip notSuccessResponseAudioClipCoffeSeller;
+    private AudioSource audioSource;
     public ChangImage changeImage;
     public Image image;
     private bool passedAlready = false;
+    private FirebaseManager firebaseManager;
+    private string expectedAnswer;
 
     void Start()
     {
-
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        // Find the DoctorText object directly
-        GameObject DoctorsText = GameObject.Find("CoffeSellerText");
-        if (DoctorsText != null)
+        firebaseManager = FindObjectOfType<FirebaseManager>();
+        if (firebaseManager == null)
         {
-            // Get the TMP_Text component from the BikeRiderText object
-            dialogueText = DoctorsText.GetComponent<TMP_Text>();
-            if (dialogueText != null)
-            {
-                Debug.Log("Text component found and assigned successfully.");
-            }
-            else
-            {
-                Debug.LogError("TMP_Text component not found on GameObject with name 'CoffeSellerText'.");
-            }
-        }
-        else
-        {
-            Debug.LogError("GameObject with name 'CoffeSellerText' not found in the scene.");
+            Debug.LogError("FirebaseManager not found in the scene!");
         }
 
-        dialogManager = FindObjectOfType<DialogManagerCoffeSeller>();
-        if (dialogManager == null)
-        {
-            Debug.LogError("DialogManager not found in the scene!");
-        }
-        else
-        {
-            dialogManager.HideDialogPanel(); // Hide the dialog panel initially
-        }
-
-        // Initialize the AudioSource component
         audioSource = gameObject.AddComponent<AudioSource>();
-        if (dialogueAudioClip != null)
+        if (dialogueAudioClip == null)
         {
-            audioSource.clip = dialogueAudioClip;
-        }
-        else
-        {
-            Debug.LogError("No initial audio source found or added!");
+            Debug.LogError("No initial audio clip assigned!");
         }
 
         recognizer = FindObjectOfType<StreamingRecognizer>();
@@ -72,36 +39,58 @@ public class CoffeSellerScript : MonoBehaviour
         {
             Debug.LogError("StreamingRecognizer component not found!");
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
         if (other.CompareTag("Player") && !passedAlready)
         {
             Debug.Log("Player entered trigger area.");
-            if (dialogManager != null)
+            if (dialogManager != null && firebaseManager != null)
             {
-                dialogueText.text = "Hi mario what would you like to order?\n\n Say: I would love a fat-free coffee, please!";
-                dialogueText.fontSize = 30;
-                dialogManager.ShowDialog();
-
-                if (dialogueAudioClip != null && audioSource != null)
-                {
-                    audioSource.clip = dialogueAudioClip;
-                    audioSource.Play(); // Play the initial audio clip
-                    StartCoroutine(StartListeningAfterAudio());
-                }
-                else
-                {
-                    Debug.LogError("Initial audio clip or audio source is missing!");
-                }
+                StartCoroutine(FetchQuestionData());
             }
             else
             {
-                Debug.LogError("DialogManager is null when Player enters trigger area.");
+                Debug.LogError("DialogManager or FirebaseManager is null when Player enters trigger area.");
             }
+        }
+    }
+
+    private IEnumerator FetchQuestionData()
+    {
+        yield return StartCoroutine(firebaseManager.GetQuestionData("question_5", OnQuestionDataReceived));
+    }
+
+    private void OnQuestionDataReceived(QuestionData questionData)
+    {
+        if (questionData != null)
+        {
+            dialogueText.text = questionData.question + "\n\nSay:\n" + questionData.answer;
+            dialogueText.fontSize = 30;
+            expectedAnswer = questionData.answer;
+
+            dialogManager.ShowDialog();
+
+            if (dialogueAudioClip != null && audioSource != null)
+            {
+                audioSource.clip = dialogueAudioClip;
+                audioSource.Play();
+                StartCoroutine(StartListeningAfterAudio());
+            }
+            else
+            {
+                Debug.LogError("Initial audio clip or audio source is missing!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to retrieve question data from Firebase.");
         }
     }
 
     IEnumerator StartListeningAfterAudio()
     {
-        // Wait until the initial audio clip finishes playing
         yield return new WaitWhile(() => audioSource.isPlaying);
 
         if (recognizer != null)
@@ -120,17 +109,15 @@ public class CoffeSellerScript : MonoBehaviour
     {
         Debug.Log("Speech Recognized: " + text);
 
-        int percentAccuracyInt = LogicUtils.CalculateAccuracyPercentage("I would love a fat free coffee please", text);
-
-        if (dialogueText != null && percentAccuracyInt > 90)
+        int percentAccuracyInt = LogicUtils.CalculateAccuracyPercentage(expectedAnswer, text);
+        if (dialogueText != null && percentAccuracyInt > 80)
         {
             Debug.Log("Correct speech recognized.");
             passedAlready = true;
             dialogueText.text = "You said it perfectly!";
             dialogueText.color = Color.green;
-             pointCounter.UpdateCoin(5);
+            pointCounter.UpdateCoin(5);
 
-            // Play the response audio clip and hide the dialog after it finishes
             if (responseAudioCoffeSeller != null && audioSource != null)
             {
                 Debug.Log("Playing response audio clip.");
@@ -149,13 +136,12 @@ public class CoffeSellerScript : MonoBehaviour
             Debug.Log($"Speech did not match expected response: {text}.");
             Debug.Log("Playing not successful response audio clip.");
 
-            // Set the unsuccessful response audio clip and play it
             if (notSuccessResponseAudioClipCoffeSeller != null && audioSource != null)
             {
                 audioSource.clip = notSuccessResponseAudioClipCoffeSeller;
                 audioSource.Play();
                 StartCoroutine(HideDialogAfterAudio());
-                 pointCounter.UpdateCoin(-1);
+                pointCounter.UpdateCoin(-1);
             }
             else
             {
@@ -169,7 +155,6 @@ public class CoffeSellerScript : MonoBehaviour
 
     IEnumerator HideDialogAfterAudio()
     {
-        // Wait until the audio clip finishes playing
         Debug.Log("Waiting for audio clip to finish playing.");
         yield return new WaitWhile(() => audioSource.isPlaying);
 

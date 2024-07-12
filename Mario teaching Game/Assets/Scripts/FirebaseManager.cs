@@ -11,20 +11,22 @@ public class FirebaseManager : MonoBehaviour
 
     void Start()
     {
-        // Example usage
-        // WriteUserData("user123", "password123", 100);
-        // WriteQuestionData("Mario", "Hey Mario, How are you?", "I'm fine thank you", 1);
+        // WriteUserData("user123", "password123", 1, 0);
+        WriteQuestionData("question_1_level_2", "Hi mario! Do you have any plans for today? ", "yes im planing to learn english and talk with the pepople i will meet later", 2);
+        // WriteQuestionData("question_4", "Hi Mario, what do you want to report?", "My wallet was stolen, I need help", 1);
+        // WriteQuestionData("question_5", "Hi mario what would you like to order?", "I would love a fat-free coffee, please!", 1);
 
         // ReadUserData("user123");
         // ReadQuestionData("Mario");
     }
 
-    public void WriteUserData(string username, string password, int score)
+    public void WriteUserData(string username, string password, int level, int score)
     {
         userData = new UserData
         {
             username = username,
             password = password,
+            level = level,
             score = score
         };
         string jsonData = JsonUtility.ToJson(userData);
@@ -74,7 +76,26 @@ public class FirebaseManager : MonoBehaviour
             callback?.Invoke(questiondata);
         }
     }
+    public IEnumerator GetUserData(string userName, System.Action<UserData> callback)
+    {
+        string path = $"questions/{userName}";
+        string url = $"{databaseURL}{path}.json?auth={apiKey}";
+        UnityWebRequest request = UnityWebRequest.Get(url);
 
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.LogError("Error retrieving data from Firebase: " + request.error);
+        }
+        else
+        {
+            Debug.Log("Data successfully retrieved from Firebase.");
+            string jsonData = request.downloadHandler.text;
+            this.userData = JsonUtility.FromJson<UserData>(jsonData);
+            callback?.Invoke(userData);
+        }
+    }
     private IEnumerator PostRequest(string path, string jsonData)
     {
         string url = $"{databaseURL}{path}.json?auth={apiKey}";
@@ -134,6 +155,7 @@ public class UserData
 {
     public string username;
     public string password;
+    public int level;
     public int score;
 }
 

@@ -1,27 +1,37 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using GoogleCloudStreamingSpeechToText;
-using TMPro;
+using System.Collections;
+
 public class GameManager : MonoBehaviour
 {
-    
-    public static bool isGamePaused = false;
     public static GameManager Instance { get; private set; }
+    public static bool isGamePaused = false;
     public bool isOKButtonClicked = false;
     public int world { get; private set; }
     public int stage { get; private set; }
     public int lives { get; private set; }
     public int coins { get; private set; }
+    public FirebaseManager firebaseManager;
+    public UserData UserData { get; private set; } // Store user data here
 
     private void Awake()
     {
-        if (Instance != null) {
+        if (Instance != null)
+        {
             DestroyImmediate(gameObject);
-        } else {
+        }
+        else
+        {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        Application.targetFrameRate = 60;
+        StartCoroutine(firebaseManager.GetUserData("user123", OnUserDataReceived));
+        NewGame();
     }
 
     private void Update()
@@ -38,30 +48,34 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (Instance == this) {
+        if (Instance == this)
+        {
             Instance = null;
         }
     }
 
-    private void Start()
+    private void OnUserDataReceived(UserData userData)
     {
-        Application.targetFrameRate = 60;
-
-        NewGame();
+        if (userData != null)
+        {
+            UserData = userData;
+            Debug.Log("User level is : " + UserData.level);
+        }
+        else
+        {
+            Debug.LogError("Failed to retrieve user data from Firebase.");
+        }
     }
 
     public void NewGame()
     {
         lives = 3;
         coins = 0;
-
         LoadLevel(1, 1);
     }
 
     public void GameOver()
     {
-        // TODO: show game over screen
-
         NewGame();
     }
 
@@ -69,7 +83,6 @@ public class GameManager : MonoBehaviour
     {
         this.world = world;
         this.stage = stage;
-
         SceneManager.LoadScene($"{world}-{stage}");
     }
 
@@ -87,9 +100,12 @@ public class GameManager : MonoBehaviour
     {
         lives--;
 
-        if (lives > 0) {
+        if (lives > 0)
+        {
             LoadLevel(world, stage);
-        } else {
+        }
+        else
+        {
             GameOver();
         }
     }
@@ -103,7 +119,6 @@ public class GameManager : MonoBehaviour
             coins = 0;
             AddLife();
         }
-       
     }
 
     public void AddLife()
@@ -111,7 +126,8 @@ public class GameManager : MonoBehaviour
         lives++;
     }
 
-    public void OnClickOk(){
+    public void OnClickOk()
+    {
         isOKButtonClicked = true;
         isGamePaused = false;
     }

@@ -10,8 +10,8 @@ public class HelloWomenScript : MonoBehaviour
     public DialogManager dialogManager;
     public PointCounter pointCounter;
     private StreamingRecognizer recognizer;
-    public AudioClip dialogueAudioClip;
-    public AudioClip responseAudioClip;
+    public AudioClip[] dialogueAudioClips;
+    public AudioClip[] responseAudioClips;
     public AudioClip notSuccessResponseAudioClip;
     private AudioSource audioSource;
     public ChangImage changeImage;
@@ -19,6 +19,7 @@ public class HelloWomenScript : MonoBehaviour
     private bool passedAlready = false;
     private FirebaseManager firebaseManager;
     private string expectedAnswer;
+    private int userLevel; // Default user level
 
     void Start()
     {
@@ -29,7 +30,7 @@ public class HelloWomenScript : MonoBehaviour
         }
 
         audioSource = gameObject.AddComponent<AudioSource>();
-        if (dialogueAudioClip == null)
+        if (dialogueAudioClips == null)
         {
             Debug.LogError("No initial audio clip assigned!");
         }
@@ -39,10 +40,12 @@ public class HelloWomenScript : MonoBehaviour
         {
             Debug.LogError("StreamingRecognizer component not found!");
         }
+        this.userLevel = GameManager.Instance.UserData.level;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.CompareTag("Player") && !passedAlready)
         {
             Debug.Log("Player entered trigger area.");
@@ -59,7 +62,15 @@ public class HelloWomenScript : MonoBehaviour
 
     private IEnumerator FetchQuestionData()
     {
-        yield return StartCoroutine(firebaseManager.GetQuestionData("question_1", OnQuestionDataReceived));
+        // Select audio clip based on user level
+        if (this.userLevel == 1)
+        {
+            yield return StartCoroutine(firebaseManager.GetQuestionData("question_1", OnQuestionDataReceived));
+        }
+        else
+        {
+            yield return StartCoroutine(firebaseManager.GetQuestionData("question_1_level_2", OnQuestionDataReceived));
+        }
     }
 
     private void OnQuestionDataReceived(QuestionData questionData)
@@ -72,15 +83,16 @@ public class HelloWomenScript : MonoBehaviour
 
             dialogManager.ShowDialog();
 
-            if (dialogueAudioClip != null && audioSource != null)
+            // Select audio clip based on user level
+            if (audioSource != null)
             {
-                audioSource.clip = dialogueAudioClip;
+                audioSource.clip = dialogueAudioClips[this.userLevel + 1];
                 audioSource.Play();
                 StartCoroutine(StartListeningAfterAudio());
             }
             else
             {
-                Debug.LogError("Initial audio clip or audio source is missing!");
+                Debug.LogError("Appropriate audio clip or audio source is missing for the current level!");
             }
         }
         else
@@ -88,6 +100,7 @@ public class HelloWomenScript : MonoBehaviour
             Debug.LogError("Failed to retrieve question data from Firebase.");
         }
     }
+
 
     IEnumerator StartListeningAfterAudio()
     {
@@ -118,16 +131,18 @@ public class HelloWomenScript : MonoBehaviour
             dialogueText.color = Color.green;
             pointCounter.UpdateCoin(5);
 
-            if (responseAudioClip != null && audioSource != null)
+            // Select response audio clip based on user level
+            int userLevel = GameManager.Instance.UserData.level; // Get user level from GameManager
+            if (userLevel <= responseAudioClips.Length && audioSource != null)
             {
                 Debug.Log("Playing response audio clip.");
-                audioSource.clip = responseAudioClip;
+                audioSource.clip = responseAudioClips[this.userLevel + 1];
                 audioSource.Play();
                 StartCoroutine(HideDialogAfterAudio());
             }
             else
             {
-                Debug.LogError("Response audio clip or audio source is missing!");
+                Debug.LogError("Response audio clip or audio source is missing for the current level!");
             }
         }
         else

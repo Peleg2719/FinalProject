@@ -2381,9 +2381,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d15ec1f32ad5d438664eaa1dddbd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointCounter: {fileID: 199801318}
   dialogueText: {fileID: 1550250912}
   dialogManager: {fileID: 1529094467}
+  pointCounter: {fileID: 199801318}
   dialogueAudioClip: {fileID: 8300000, guid: ca8dcf69fbc86d14193c3aaede441d83, type: 3}
   responseAudioBikeRider: {fileID: 8300000, guid: 06389c50a9e9d164085f399abfecd59c, type: 3}
   notSuccessResponseAudioClipBikeRider: {fileID: 8300000, guid: dc5977c2e5727c64d828d840d056510a, type: 3}
@@ -4503,6 +4503,7 @@ MonoBehaviour:
   userData:
     username: 
     password: 
+    level: 0
     score: 0
 --- !u!4 &665550972
 Transform:
@@ -5249,6 +5250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOKButtonClicked: 0
+  firebaseManager: {fileID: 0}
 --- !u!4 &742341785
 Transform:
   m_ObjectHideFlags: 0
@@ -7253,8 +7255,12 @@ MonoBehaviour:
   dialogueText: {fileID: 565429187}
   dialogManager: {fileID: 1097772607}
   pointCounter: {fileID: 199801318}
-  dialogueAudioClip: {fileID: 8300000, guid: 7a27772c8af6a2142a3c95e8c89b7173, type: 3}
-  responseAudioClip: {fileID: 8300000, guid: 25b37a05511e7904dbdb36e065e07222, type: 3}
+  dialogueAudioClips:
+  - {fileID: 8300000, guid: 7a27772c8af6a2142a3c95e8c89b7173, type: 3}
+  - {fileID: 8300000, guid: 194a17c1d563722418b2998d2bbd44f5, type: 3}
+  responseAudioClips:
+  - {fileID: 8300000, guid: 25b37a05511e7904dbdb36e065e07222, type: 3}
+  - {fileID: 8300000, guid: e579b75f16e13ce4eb69dac80aebdc67, type: 3}
   notSuccessResponseAudioClip: {fileID: 8300000, guid: d34eb322437b91d4e99404c2b580d520, type: 3}
   changeImage: {fileID: 1787932351}
   image: {fileID: 0}
@@ -7297,8 +7303,7 @@ MonoBehaviour:
   onInterimResult:
     m_PersistentCalls:
       m_Calls: []
-  _microphoneName: "Microphone Array (\u05D8\u05DB\u05E0\u05D5\u05DC\u05D5\u05D2\u05D9\u05D9\u05EA
-    Intel\xAE Smart Sound)"
+  _microphoneName: Microphone (Realtek(R) Audio)
 --- !u!82 &957508564
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7533,9 +7538,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52749a5c4fe51f4093ade2f0f658a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointCounter: {fileID: 199801318}
   dialogueText: {fileID: 1746679280}
   dialogManager: {fileID: 2028913187}
+  pointCounter: {fileID: 199801318}
   dialogueAudioClip: {fileID: 8300000, guid: cece9090399bb33438643885073d1f4a, type: 3}
   responseAudioCoffeSeller: {fileID: 8300000, guid: 3f2e5fa80b787f641b36262694e1cfb5, type: 3}
   notSuccessResponseAudioClipCoffeSeller: {fileID: 8300000, guid: c80ecfd98bb01a7428a06c0045458fd7, type: 3}
@@ -7937,8 +7942,8 @@ MonoBehaviour:
   dialogueText: {fileID: 0}
   dialogManager: {fileID: 0}
   pointCounter: {fileID: 0}
-  dialogueAudioClip: {fileID: 0}
-  responseAudioClip: {fileID: 0}
+  dialogueAudioClips: []
+  responseAudioClips: []
   notSuccessResponseAudioClip: {fileID: 0}
   changeImage: {fileID: 0}
   image: {fileID: 0}
@@ -11044,8 +11049,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 1212545800}
-  pointCounter: {fileID: 199801318}
   dialogManager: {fileID: 378284454}
+  pointCounter: {fileID: 199801318}
   dialogueAudioClip: {fileID: 8300000, guid: 2cdf6d27245db4348870505dd19d8ef9, type: 3}
   responseAudioCop: {fileID: 8300000, guid: 7b8bff71f805e044fb68b03a108f7625, type: 3}
   notSuccessResponseAudioClipCop: {fileID: 8300000, guid: 357a3fbd9a2f3bd4eaa65e9b76996b14, type: 3}
@@ -14128,9 +14133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d5afde6af08bf148899c6ec8cf11f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointCounter: {fileID: 199801318}
   dialogueText: {fileID: 24381749}
   dialogManager: {fileID: 667347854}
+  pointCounter: {fileID: 199801318}
   dialogueAudioClip: {fileID: 8300000, guid: 1efbae65e6ba8f44ca4f022e57bd2ab7, type: 3}
   responseAudioDoctor: {fileID: 8300000, guid: db62518041777e740af954aaf2d41db8, type: 3}
   notSuccessResponseAudioClipDoctor: {fileID: 8300000, guid: cb9d29df95b58eb408468dba93a9909a, type: 3}
