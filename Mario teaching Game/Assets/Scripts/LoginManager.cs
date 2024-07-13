@@ -16,6 +16,7 @@ public class LoginManager : MonoBehaviour
      public GameObject microphoneCanvas;
      public GameObject coinCanvas;
      public TextMeshProUGUI errorMessage;
+     public  FirebaseManager firebaseManager;
 
 
     // Replace this with your own user validation logic
@@ -31,26 +32,36 @@ public class LoginManager : MonoBehaviour
         
     }
 
-    private void OnLoginButtonClicked()
+       private void OnLoginButtonClicked()
     {
         string username = usernameInput.text;
         string password = passwordInput.text;
 
-        if (ValidateCredentials(username, password))
+        firebaseManager.ReadUserData(username, userData =>
         {
-            // Load the main game scene
-            GameManager.StartGame();
-            LoginCanvas.SetActive(false); // Disable the login canvas
-            microphoneCanvas.SetActive(true);
-            coinCanvas.SetActive(true);
-        }
-        else
-        {
-            Debug.Log("Invalid credentials");
-            errorMessage.text = "Invalid username or password. Please try again.";
-            // Show an error message to the user
-        }
+            if(userData==null)
+            {
+                Debug.Log("Invalid credentials");
+                errorMessage.text = "Invalid username or password. Please try again.";
+            }
+            if (userData != null && userData.password == password)
+            {
+                GameManager.StartGame();
+                LoginCanvas.SetActive(false); // Disable the login canvas
+                microphoneCanvas.SetActive(true);
+                coinCanvas.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("Invalid credentials");
+                errorMessage.text = "Invalid username or password. Please try again.";
+            }
+            return;
+        });
+                Debug.Log("Invalid credentials");
+                errorMessage.text = "Invalid username or password. Please try again.";
     }
+
 
     private void OnRegisterButtonClicked()
     {

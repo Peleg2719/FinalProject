@@ -20,14 +20,15 @@ public class FirebaseManager : MonoBehaviour
         // ReadQuestionData("Mario");
     }
 
-    public void WriteUserData(string username, string password, int level, int score)
+  public void WriteUserData(string username, string password, int level, int score, Language language)
     {
         userData = new UserData
         {
             username = username,
             password = password,
             level = level,
-            score = score
+            score = score,
+            language = language
         };
         string jsonData = JsonUtility.ToJson(userData);
         StartCoroutine(PostRequest("user_data/" + username, jsonData));
@@ -46,9 +47,13 @@ public class FirebaseManager : MonoBehaviour
         StartCoroutine(PostRequest("questions/" + characterName, jsonData));
     }
 
-    public void ReadUserData(string username)
+     public void ReadUserData(string username, System.Action<UserData> callback)
     {
-        StartCoroutine(GetRequest("user_data/" + username, OnUserDataReceived));
+        StartCoroutine(GetRequest("user_data/" + username, jsonData =>
+        {
+            UserData userData = JsonUtility.FromJson<UserData>(jsonData);
+            callback?.Invoke(userData);
+        }));
     }
 
     public void ReadQuestionData(string characterName)
@@ -133,6 +138,9 @@ public class FirebaseManager : MonoBehaviour
             Debug.Log("Data successfully retrieved from Firebase.");
             callback?.Invoke(request.downloadHandler.text);
         }
+
+
+        
     }
 
     private void OnUserDataReceived(string jsonData)
