@@ -19,6 +19,7 @@ public class HelloWomenScript : MonoBehaviour
     private bool passedAlready = false;
     private FirebaseManager firebaseManager;
     private string expectedAnswer;
+    private GameManager gameManager;
     private int userLevel; // Default user level
 
     void Start()
@@ -40,17 +41,15 @@ public class HelloWomenScript : MonoBehaviour
         {
             Debug.LogError("StreamingRecognizer component not found!");
         }
-     
-         this.userLevel = GameManager.Instance.UserData.level;
-
-      
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-
+        // Check if UserManager.Instance exists and has CurrentUser data
+        this.userLevel = UserManager.Instance.CurrentUser.level;
         if (other.CompareTag("Player") && !passedAlready)
         {
+            GameManager.IsGamePaused = true;
             Debug.Log("Player entered trigger area.");
             if (dialogManager != null && firebaseManager != null)
             {
@@ -70,7 +69,7 @@ public class HelloWomenScript : MonoBehaviour
         {
             yield return StartCoroutine(firebaseManager.GetQuestionData("question_1", OnQuestionDataReceived));
         }
-        else
+        else if (this.userLevel == 2)
         {
             yield return StartCoroutine(firebaseManager.GetQuestionData("question_1_level_2", OnQuestionDataReceived));
         }
@@ -89,7 +88,7 @@ public class HelloWomenScript : MonoBehaviour
             // Select audio clip based on user level
             if (audioSource != null)
             {
-                audioSource.clip = dialogueAudioClips[this.userLevel + 1];
+                audioSource.clip = dialogueAudioClips[this.userLevel - 1];
                 audioSource.Play();
                 StartCoroutine(StartListeningAfterAudio());
             }
@@ -126,7 +125,7 @@ public class HelloWomenScript : MonoBehaviour
         Debug.Log("Speech Recognized: " + text);
 
         int percentAccuracyInt = LogicUtils.CalculateAccuracyPercentage(expectedAnswer, text);
-        if (dialogueText != null && percentAccuracyInt > 80)
+        if (dialogueText != null && percentAccuracyInt >= 80)
         {
             Debug.Log("Correct speech recognized.");
             passedAlready = true;
@@ -135,15 +134,14 @@ public class HelloWomenScript : MonoBehaviour
             pointCounter.UpdateCoin(5);
 
             // Select response audio clip based on user level
-            int userLevel = GameManager.Instance.UserData.level; // Get user level from GameManager
-            if (userLevel <= responseAudioClips.Length && audioSource != null)
+            if (this.userLevel <= responseAudioClips.Length && audioSource != null)
             {
                 Debug.Log("Playing response audio clip.");
-                audioSource.clip = responseAudioClips[this.userLevel + 1];
+                audioSource.clip = responseAudioClips[this.userLevel - 1];
                 audioSource.Play();
                 GameManager.IsGamePaused = false; // Resume the game
                 StartCoroutine(HideDialogAfterAudio());
-                
+
             }
             else
             {

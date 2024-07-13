@@ -10,8 +10,8 @@ public class DoctorsScript : MonoBehaviour
     public DialogManagerDoctor dialogManager;
     public PointCounter pointCounter;
     private StreamingRecognizer recognizer;
-    public AudioClip dialogueAudioClip;
-    public AudioClip responseAudioDoctor;
+    public AudioClip[] dialogueAudioClips;
+    public AudioClip[] responseAudioClips;
     public AudioClip notSuccessResponseAudioClipDoctor;
     private AudioSource audioSource;
     public ChangImage changeImage;
@@ -19,6 +19,8 @@ public class DoctorsScript : MonoBehaviour
     private bool passedAlready = false;
     private FirebaseManager firebaseManager;
     private string expectedAnswer;
+    private GameManager gameManager;
+    private int userLevel; // Default user level
 
     void Start()
     {
@@ -29,7 +31,7 @@ public class DoctorsScript : MonoBehaviour
         }
 
         audioSource = gameObject.AddComponent<AudioSource>();
-        if (dialogueAudioClip == null)
+        if (dialogueAudioClips == null)
         {
             Debug.LogError("No initial audio clip assigned!");
         }
@@ -43,6 +45,9 @@ public class DoctorsScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        GameManager.IsGamePaused = true;
+        // Check if UserManager.Instance exists and has CurrentUser data
+        this.userLevel = UserManager.Instance.CurrentUser.level;
         if (other.CompareTag("Player") && !passedAlready)
         {
             Debug.Log("Player entered trigger area.");
@@ -56,10 +61,17 @@ public class DoctorsScript : MonoBehaviour
             }
         }
     }
-
     private IEnumerator FetchQuestionData()
     {
-        yield return StartCoroutine(firebaseManager.GetQuestionData("question_3", OnQuestionDataReceived));
+        // Select audio clip based on user level
+        if (this.userLevel == 1)
+        {
+            yield return StartCoroutine(firebaseManager.GetQuestionData("question_3", OnQuestionDataReceived));
+        }
+        else if (this.userLevel == 2)
+        {
+            yield return StartCoroutine(firebaseManager.GetQuestionData("question_3_level_2", OnQuestionDataReceived));
+        }
     }
 
     private void OnQuestionDataReceived(QuestionData questionData)
@@ -72,15 +84,16 @@ public class DoctorsScript : MonoBehaviour
 
             dialogManager.ShowDialog();
 
-            if (dialogueAudioClip != null && audioSource != null)
+            // Select audio clip based on user level
+            if (audioSource != null)
             {
-                audioSource.clip = dialogueAudioClip;
+                audioSource.clip = dialogueAudioClips[this.userLevel - 1];
                 audioSource.Play();
                 StartCoroutine(StartListeningAfterAudio());
             }
             else
             {
-                Debug.LogError("Initial audio clip or audio source is missing!");
+                Debug.LogError("Appropriate audio clip or audio source is missing for the current level!");
             }
         }
         else
@@ -110,24 +123,26 @@ public class DoctorsScript : MonoBehaviour
         Debug.Log("Speech Recognized: " + text);
 
         int percentAccuracyInt = LogicUtils.CalculateAccuracyPercentage(expectedAnswer, text);
-        if (dialogueText != null && percentAccuracyInt > 80)
+        if (dialogueText != null && percentAccuracyInt >= 80)
         {
             Debug.Log("Correct speech recognized.");
             passedAlready = true;
             dialogueText.text = "You said it perfectly!";
             dialogueText.color = Color.green;
             pointCounter.UpdateCoin(5);
-
-            if (responseAudioDoctor != null && audioSource != null)
+            // Select response audio clip based on user level
+            if (this.userLevel <= responseAudioClips.Length && audioSource != null)
             {
                 Debug.Log("Playing response audio clip.");
-                audioSource.clip = responseAudioDoctor;
+                audioSource.clip = responseAudioClips[this.userLevel - 1];
                 audioSource.Play();
+                GameManager.IsGamePaused = false; // Resume the game
                 StartCoroutine(HideDialogAfterAudio());
+
             }
             else
             {
-                Debug.LogError("Response audio clip or audio source is missing!");
+                Debug.LogError("Response audio clip or audio source is missing for the current level!");
             }
         }
         else

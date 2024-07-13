@@ -3629,8 +3629,12 @@ MonoBehaviour:
   dialogueText: {fileID: 1550250912}
   dialogManager: {fileID: 1529094467}
   pointCounter: {fileID: 199801318}
-  dialogueAudioClip: {fileID: 8300000, guid: ca8dcf69fbc86d14193c3aaede441d83, type: 3}
-  responseAudioBikeRider: {fileID: 8300000, guid: 06389c50a9e9d164085f399abfecd59c, type: 3}
+  dialogueAudioClips:
+  - {fileID: 8300000, guid: ca8dcf69fbc86d14193c3aaede441d83, type: 3}
+  - {fileID: 8300000, guid: e2031abc965a1df4a9f670ef1a741039, type: 3}
+  responseAudioClips:
+  - {fileID: 8300000, guid: 06389c50a9e9d164085f399abfecd59c, type: 3}
+  - {fileID: 8300000, guid: 3330bf31165acec4b98896e960b5efc4, type: 3}
   notSuccessResponseAudioClipBikeRider: {fileID: 8300000, guid: dc5977c2e5727c64d828d840d056510a, type: 3}
   changeImage: {fileID: 1787932351}
   image: {fileID: 0}
@@ -3661,8 +3665,7 @@ MonoBehaviour:
   onInterimResult:
     m_PersistentCalls:
       m_Calls: []
-  _microphoneName: "Microphone Array (\u05D8\u05DB\u05E0\u05D5\u05DC\u05D5\u05D2\u05D9\u05D9\u05EA
-    Intel\xAE Smart Sound)"
+  _microphoneName: Microphone (Realtek(R) Audio)
 --- !u!114 &308159347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6958,8 +6961,8 @@ MonoBehaviour:
     username: 
     password: 
     level: 0
-    score: 0
-    language: 0
+    scoreEn: 0
+    scoreEs: 0
 --- !u!4 &665550972
 Transform:
   m_ObjectHideFlags: 0
@@ -7836,6 +7839,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 841438207429839043, guid: 8268706537ea4644a879746713c1ec55, type: 3}
   m_PrefabInstance: {fileID: 717538335}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &720293388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 720293390}
+  - component: {fileID: 720293389}
+  m_Layer: 0
+  m_Name: UserManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &720293389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720293388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b824679cc3f6348bd02568e5f1a336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &720293390
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720293388}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 23.57524, y: 8.462333, z: -0.06356998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &722247314 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6441841789286464594, guid: 962898cbc3d9ed649b7a54a9a408f125, type: 3}
@@ -10495,8 +10542,12 @@ MonoBehaviour:
   dialogueText: {fileID: 1746679280}
   dialogManager: {fileID: 2028913187}
   pointCounter: {fileID: 199801318}
-  dialogueAudioClip: {fileID: 8300000, guid: cece9090399bb33438643885073d1f4a, type: 3}
-  responseAudioCoffeSeller: {fileID: 8300000, guid: 3f2e5fa80b787f641b36262694e1cfb5, type: 3}
+  dialogueAudioClips:
+  - {fileID: 8300000, guid: cece9090399bb33438643885073d1f4a, type: 3}
+  - {fileID: 8300000, guid: dadbc58b7971e9e40ae9b84067e2c093, type: 3}
+  responseAudioClips:
+  - {fileID: 8300000, guid: 3f2e5fa80b787f641b36262694e1cfb5, type: 3}
+  - {fileID: 8300000, guid: f7c35844772338c438f7bb251b971371, type: 3}
   notSuccessResponseAudioClipCoffeSeller: {fileID: 8300000, guid: c80ecfd98bb01a7428a06c0045458fd7, type: 3}
   changeImage: {fileID: 1787932351}
   image: {fileID: 0}
@@ -15439,8 +15490,12 @@ MonoBehaviour:
   dialogueText: {fileID: 1212545800}
   dialogManager: {fileID: 378284454}
   pointCounter: {fileID: 199801318}
-  dialogueAudioClip: {fileID: 8300000, guid: 2cdf6d27245db4348870505dd19d8ef9, type: 3}
-  responseAudioCop: {fileID: 8300000, guid: 7b8bff71f805e044fb68b03a108f7625, type: 3}
+  dialogueAudioClips:
+  - {fileID: 8300000, guid: 2cdf6d27245db4348870505dd19d8ef9, type: 3}
+  - {fileID: 8300000, guid: 4101b42d82517a24ebf763ff7b3340e2, type: 3}
+  responseAudioClips:
+  - {fileID: 8300000, guid: 7b8bff71f805e044fb68b03a108f7625, type: 3}
+  - {fileID: 8300000, guid: 1e1de57f30b7c4b43b51f7858823f540, type: 3}
   notSuccessResponseAudioClipCop: {fileID: 8300000, guid: 357a3fbd9a2f3bd4eaa65e9b76996b14, type: 3}
   changeImage: {fileID: 1787932351}
   image: {fileID: 0}
@@ -19350,8 +19405,12 @@ MonoBehaviour:
   dialogueText: {fileID: 24381749}
   dialogManager: {fileID: 667347854}
   pointCounter: {fileID: 199801318}
-  dialogueAudioClip: {fileID: 8300000, guid: 1efbae65e6ba8f44ca4f022e57bd2ab7, type: 3}
-  responseAudioDoctor: {fileID: 8300000, guid: db62518041777e740af954aaf2d41db8, type: 3}
+  dialogueAudioClips:
+  - {fileID: 8300000, guid: 1efbae65e6ba8f44ca4f022e57bd2ab7, type: 3}
+  - {fileID: 8300000, guid: e5ba6ef7132b4ed49995a3b0063cba39, type: 3}
+  responseAudioClips:
+  - {fileID: 8300000, guid: db62518041777e740af954aaf2d41db8, type: 3}
+  - {fileID: 8300000, guid: 79f1c4bea1c96f846b7e32682f5ac0d6, type: 3}
   notSuccessResponseAudioClipDoctor: {fileID: 8300000, guid: cb9d29df95b58eb408468dba93a9909a, type: 3}
   changeImage: {fileID: 1787932351}
   image: {fileID: 0}
@@ -19478,8 +19537,7 @@ MonoBehaviour:
   onInterimResult:
     m_PersistentCalls:
       m_Calls: []
-  _microphoneName: "Microphone Array (\u05D8\u05DB\u05E0\u05D5\u05DC\u05D5\u05D2\u05D9\u05D9\u05EA
-    Intel\xAE Smart Sound)"
+  _microphoneName: Microphone (Realtek(R) Audio)
 --- !u!114 &1862309877
 MonoBehaviour:
   m_ObjectHideFlags: 0

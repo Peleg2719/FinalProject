@@ -10,8 +10,8 @@ public class bikeriderscript : MonoBehaviour
     public BikeRiderDialogManager dialogManager;
     public PointCounter pointCounter;
     private StreamingRecognizer recognizer;
-    public AudioClip dialogueAudioClip;
-    public AudioClip responseAudioBikeRider;
+    public AudioClip[] dialogueAudioClips;
+    public AudioClip[] responseAudioClips;
     public AudioClip notSuccessResponseAudioClipBikeRider;
     private AudioSource audioSource;
     public ChangImage changeImage;
@@ -19,6 +19,8 @@ public class bikeriderscript : MonoBehaviour
     private bool passedAlready = false;
     private FirebaseManager firebaseManager;
     private string expectedAnswer;
+    private GameManager gameManager;
+    private int userLevel; // Default user level
 
     void Start()
     {
@@ -29,7 +31,7 @@ public class bikeriderscript : MonoBehaviour
         }
 
         audioSource = gameObject.AddComponent<AudioSource>();
-        if (dialogueAudioClip == null)
+        if (dialogueAudioClips == null)
         {
             Debug.LogError("No initial audio clip assigned!");
         }
@@ -43,8 +45,10 @@ public class bikeriderscript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        this.userLevel = UserManager.Instance.CurrentUser.level;
         if (other.CompareTag("Player") && !passedAlready)
         {
+            GameManager.IsGamePaused = true;
             Debug.Log("Player entered trigger area.");
             if (dialogManager != null && firebaseManager != null)
             {
@@ -59,7 +63,15 @@ public class bikeriderscript : MonoBehaviour
 
     private IEnumerator FetchQuestionData()
     {
-        yield return StartCoroutine(firebaseManager.GetQuestionData("question_2", OnQuestionDataReceived));
+        // Select audio clip based on user level
+        if (this.userLevel == 1)
+        {
+            yield return StartCoroutine(firebaseManager.GetQuestionData("question_2", OnQuestionDataReceived));
+        }
+        else if (this.userLevel == 2)
+        {
+            yield return StartCoroutine(firebaseManager.GetQuestionData("question_2_level_2", OnQuestionDataReceived));
+        }
     }
 
     private void OnQuestionDataReceived(QuestionData questionData)
@@ -72,9 +84,9 @@ public class bikeriderscript : MonoBehaviour
 
             dialogManager.ShowDialog();
 
-            if (dialogueAudioClip != null && audioSource != null)
+            if (dialogueAudioClips != null && audioSource != null)
             {
-                audioSource.clip = dialogueAudioClip;
+                audioSource.clip = dialogueAudioClips[this.userLevel - 1];
                 audioSource.Play();
                 StartCoroutine(StartListeningAfterAudio());
             }
@@ -110,7 +122,7 @@ public class bikeriderscript : MonoBehaviour
         Debug.Log("Speech Recognized: " + text);
 
         int percentAccuracyInt = LogicUtils.CalculateAccuracyPercentage(expectedAnswer, text);
-        if (dialogueText != null && percentAccuracyInt > 80)
+        if (dialogueText != null && percentAccuracyInt >= 80)
         {
             Debug.Log("Correct speech recognized.");
             passedAlready = true;
@@ -118,12 +130,15 @@ public class bikeriderscript : MonoBehaviour
             dialogueText.color = Color.green;
             pointCounter.UpdateCoin(5);
 
-            if (responseAudioBikeRider != null && audioSource != null)
+            // Select response audio clip based on user level
+            if (this.userLevel <= responseAudioClips.Length && audioSource != null)
             {
                 Debug.Log("Playing response audio clip.");
-                audioSource.clip = responseAudioBikeRider;
+                audioSource.clip = responseAudioClips[this.userLevel - 1];
                 audioSource.Play();
+                GameManager.IsGamePaused = false; // Resume the game
                 StartCoroutine(HideDialogAfterAudio());
+
             }
             else
             {

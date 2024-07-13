@@ -10,8 +10,8 @@ public class CoffeSellerScript : MonoBehaviour
     public DialogManagerCoffeSeller dialogManager;
     public PointCounter pointCounter;
     private StreamingRecognizer recognizer;
-    public AudioClip dialogueAudioClip;
-    public AudioClip responseAudioCoffeSeller;
+    public AudioClip[] dialogueAudioClips;
+    public AudioClip[] responseAudioClips;
     public AudioClip notSuccessResponseAudioClipCoffeSeller;
     private AudioSource audioSource;
     public ChangImage changeImage;
@@ -19,7 +19,8 @@ public class CoffeSellerScript : MonoBehaviour
     private bool passedAlready = false;
     private FirebaseManager firebaseManager;
     private string expectedAnswer;
-
+    private GameManager gameManager;
+    private int userLevel; // Default user level
     void Start()
     {
         firebaseManager = FindObjectOfType<FirebaseManager>();
@@ -29,7 +30,7 @@ public class CoffeSellerScript : MonoBehaviour
         }
 
         audioSource = gameObject.AddComponent<AudioSource>();
-        if (dialogueAudioClip == null)
+        if (dialogueAudioClips == null)
         {
             Debug.LogError("No initial audio clip assigned!");
         }
@@ -43,8 +44,11 @@ public class CoffeSellerScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        // Check if UserManager.Instance exists and has CurrentUser data
+        this.userLevel = UserManager.Instance.CurrentUser.level;
         if (other.CompareTag("Player") && !passedAlready)
         {
+            GameManager.IsGamePaused = true;
             Debug.Log("Player entered trigger area.");
             if (dialogManager != null && firebaseManager != null)
             {
@@ -59,7 +63,15 @@ public class CoffeSellerScript : MonoBehaviour
 
     private IEnumerator FetchQuestionData()
     {
-        yield return StartCoroutine(firebaseManager.GetQuestionData("question_5", OnQuestionDataReceived));
+        // Select audio clip based on user level
+        if (this.userLevel == 1)
+        {
+            yield return StartCoroutine(firebaseManager.GetQuestionData("question_5", OnQuestionDataReceived));
+        }
+        else if (this.userLevel == 2)
+        {
+            yield return StartCoroutine(firebaseManager.GetQuestionData("question_5_level_2", OnQuestionDataReceived));
+        }
     }
 
     private void OnQuestionDataReceived(QuestionData questionData)
@@ -72,15 +84,16 @@ public class CoffeSellerScript : MonoBehaviour
 
             dialogManager.ShowDialog();
 
-            if (dialogueAudioClip != null && audioSource != null)
+            // Select audio clip based on user level
+            if (audioSource != null)
             {
-                audioSource.clip = dialogueAudioClip;
+                audioSource.clip = dialogueAudioClips[this.userLevel - 1];
                 audioSource.Play();
                 StartCoroutine(StartListeningAfterAudio());
             }
             else
             {
-                Debug.LogError("Initial audio clip or audio source is missing!");
+                Debug.LogError("Appropriate audio clip or audio source is missing for the current level!");
             }
         }
         else
@@ -110,7 +123,7 @@ public class CoffeSellerScript : MonoBehaviour
         Debug.Log("Speech Recognized: " + text);
 
         int percentAccuracyInt = LogicUtils.CalculateAccuracyPercentage(expectedAnswer, text);
-        if (dialogueText != null && percentAccuracyInt > 80)
+        if (dialogueText != null && percentAccuracyInt >= 80)
         {
             Debug.Log("Correct speech recognized.");
             passedAlready = true;
@@ -118,16 +131,19 @@ public class CoffeSellerScript : MonoBehaviour
             dialogueText.color = Color.green;
             pointCounter.UpdateCoin(5);
 
-            if (responseAudioCoffeSeller != null && audioSource != null)
+            // Select response audio clip based on user level
+            if (this.userLevel <= responseAudioClips.Length && audioSource != null)
             {
                 Debug.Log("Playing response audio clip.");
-                audioSource.clip = responseAudioCoffeSeller;
+                audioSource.clip = responseAudioClips[this.userLevel - 1];
                 audioSource.Play();
+                GameManager.IsGamePaused = false; // Resume the game
                 StartCoroutine(HideDialogAfterAudio());
+
             }
             else
             {
-                Debug.LogError("Response audio clip or audio source is missing!");
+                Debug.LogError("Response audio clip or audio source is missing for the current level!");
             }
         }
         else
@@ -152,6 +168,7 @@ public class CoffeSellerScript : MonoBehaviour
         changeImage.ChangeImageSpriteToNotRecord();
         recognizer.StopListening();
     }
+
 
     IEnumerator HideDialogAfterAudio()
     {

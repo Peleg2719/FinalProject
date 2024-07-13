@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
     public int lives { get; private set; }
     public int coins { get; private set; }
     public FirebaseManager firebaseManager;
-    public UserData UserData { get; private set; } // Store user data here
 
     private void Awake()
     {
@@ -43,11 +42,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate = 60;
-        StartCoroutine(firebaseManager.GetUserData("user123", OnUserDataReceived));
         NewGame();
-       
+
     }
-   
+
 
     /*private void Update()
     {
@@ -61,8 +59,8 @@ public class GameManager : MonoBehaviour
         }
     }*/
 
-      public static void OnChange()
-     {
+    public static void OnChange()
+    {
         if (isGamePaused)
         {
             Time.timeScale = 0f; // Pause the game
@@ -71,13 +69,13 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1f; // Resume the game
         }
-     }
-    
+    }
+
     public static void StopGame()
     {
-        
-            Time.timeScale = 0f; // Pause the game
-        
+
+        Time.timeScale = 0f; // Pause the game
+
     }
     public static void StartGame()
     {
@@ -91,18 +89,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnUserDataReceived(UserData userData)
-    {
-        if (userData != null)
-        {
-            UserData = userData;
-            Debug.Log("User level is : " + UserData.level);
-        }
-        else
-        {
-            Debug.LogError("Failed to retrieve user data from Firebase.");
-        }
-    }
 
     public void NewGame()
     {

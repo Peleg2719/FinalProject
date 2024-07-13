@@ -10,8 +10,8 @@ public class CopScript : MonoBehaviour
     public DialogManagerCopSCript dialogManager;
     public PointCounter pointCounter;
     private StreamingRecognizer recognizer;
-    public AudioClip dialogueAudioClip;
-    public AudioClip responseAudioCop;
+    public AudioClip[] dialogueAudioClips;
+    public AudioClip[] responseAudioClips;
     public AudioClip notSuccessResponseAudioClipCop;
     private AudioSource audioSource;
     public ChangImage changeImage;
@@ -19,6 +19,9 @@ public class CopScript : MonoBehaviour
     private bool passedAlready = false;
     private FirebaseManager firebaseManager;
     private string expectedAnswer;
+
+    private GameManager gameManager;
+    private int userLevel; // Default user level
 
     void Start()
     {
@@ -29,7 +32,7 @@ public class CopScript : MonoBehaviour
         }
 
         audioSource = gameObject.AddComponent<AudioSource>();
-        if (dialogueAudioClip == null)
+        if (dialogueAudioClips == null)
         {
             Debug.LogError("No initial audio clip assigned!");
         }
@@ -43,8 +46,11 @@ public class CopScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        // Check if UserManager.Instance exists and has CurrentUser data
+        this.userLevel = UserManager.Instance.CurrentUser.level;
         if (other.CompareTag("Player") && !passedAlready)
         {
+            GameManager.IsGamePaused = true;
             Debug.Log("Player entered trigger area.");
             if (dialogManager != null && firebaseManager != null)
             {
@@ -59,9 +65,16 @@ public class CopScript : MonoBehaviour
 
     private IEnumerator FetchQuestionData()
     {
-        yield return StartCoroutine(firebaseManager.GetQuestionData("question_4", OnQuestionDataReceived));
+        // Select audio clip based on user level
+        if (this.userLevel == 1)
+        {
+            yield return StartCoroutine(firebaseManager.GetQuestionData("question_4", OnQuestionDataReceived));
+        }
+        else if (this.userLevel == 2)
+        {
+            yield return StartCoroutine(firebaseManager.GetQuestionData("question_4_level_2", OnQuestionDataReceived));
+        }
     }
-
     private void OnQuestionDataReceived(QuestionData questionData)
     {
         if (questionData != null)
@@ -72,9 +85,9 @@ public class CopScript : MonoBehaviour
 
             dialogManager.ShowDialog();
 
-            if (dialogueAudioClip != null && audioSource != null)
+            if (dialogueAudioClips != null && audioSource != null)
             {
-                audioSource.clip = dialogueAudioClip;
+                audioSource.clip = dialogueAudioClips[this.userLevel - 1];
                 audioSource.Play();
                 StartCoroutine(StartListeningAfterAudio());
             }
@@ -110,7 +123,7 @@ public class CopScript : MonoBehaviour
         Debug.Log("Speech Recognized: " + text);
 
         int percentAccuracyInt = LogicUtils.CalculateAccuracyPercentage(expectedAnswer, text);
-        if (dialogueText != null && percentAccuracyInt > 80)
+        if (dialogueText != null && percentAccuracyInt >= 80)
         {
             Debug.Log("Correct speech recognized.");
             passedAlready = true;
@@ -118,16 +131,19 @@ public class CopScript : MonoBehaviour
             dialogueText.color = Color.green;
             pointCounter.UpdateCoin(5);
 
-            if (responseAudioCop != null && audioSource != null)
+            // Select response audio clip based on user level
+            if (this.userLevel <= responseAudioClips.Length && audioSource != null)
             {
                 Debug.Log("Playing response audio clip.");
-                audioSource.clip = responseAudioCop;
+                audioSource.clip = responseAudioClips[this.userLevel - 1];
                 audioSource.Play();
+                GameManager.IsGamePaused = false; // Resume the game
                 StartCoroutine(HideDialogAfterAudio());
+
             }
             else
             {
-                Debug.LogError("Response audio clip or audio source is missing!");
+                Debug.LogError("Response audio clip or audio source is missing for the current level!");
             }
         }
         else
@@ -152,7 +168,6 @@ public class CopScript : MonoBehaviour
         changeImage.ChangeImageSpriteToNotRecord();
         recognizer.StopListening();
     }
-
     IEnumerator HideDialogAfterAudio()
     {
         Debug.Log("Waiting for audio clip to finish playing.");
