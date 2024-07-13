@@ -20,15 +20,15 @@ public class FirebaseManager : MonoBehaviour
         // ReadQuestionData("Mario");
     }
 
-  public void WriteUserData(string username, string password, int level, int score, Language language)
+  public void WriteUserData(string username, string password, int level, int scoreEn, int scoreEs)
     {
         userData = new UserData
         {
             username = username,
             password = password,
             level = level,
-            score = score,
-            language = language
+            scoreEn = scoreEn,
+            scoreEs = scoreEs
         };
         string jsonData = JsonUtility.ToJson(userData);
         StartCoroutine(PostRequest("user_data/" + username, jsonData));
@@ -147,7 +147,8 @@ public class FirebaseManager : MonoBehaviour
     {
         userData = JsonUtility.FromJson<UserData>(jsonData);
         Debug.Log("Username: " + userData.username);
-        Debug.Log("Score: " + userData.score);
+        Debug.Log("ScoreEs: " + userData.scoreEs);
+         Debug.Log("ScoreEn: " + userData.scoreEn);
     }
 
     private void OnQuestionDataReceived(string jsonData)
@@ -158,19 +159,16 @@ public class FirebaseManager : MonoBehaviour
     }
 }
 
-public enum Language
-{
-   en,
-   es
-}
+
 [System.Serializable]
 public class UserData
 {
     public string username;
     public string password;
     public int level;
-    public int score;
-    public Language language;
+    public int scoreEn;
+    public int scoreEs;
+    
   
 }
 
