@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,19 +10,23 @@ public class LoginManager : MonoBehaviour
 
     public TMP_InputField usernameInput; // Use TMP_InputField instead of InputField
     public TMP_InputField passwordInput;
-    public TextMeshProUGUI messageText; // Use TextMeshProUGUI for message text
     public Button loginButton;
+    public Button registerButton;
+     public GameObject LoginCanvas;
+     public GameObject microphoneCanvas;
+     public GameObject coinCanvas;
+
 
     // Replace this with your own user validation logic
-    private bool ValidateCredentials(string username, string password)
-    {
-        // Example: Check if username is "admin" and password is "password"
-        return username == "admin" && password == "password";
-    }
-
     private void Start()
     {
         loginButton.onClick.AddListener(OnLoginButtonClicked);
+        registerButton.onClick.AddListener(OnRegisterButtonClicked);
+        GameManager.IsGamePaused = true; // Pause the game
+        LoginCanvas.SetActive(true);
+        microphoneCanvas.SetActive(false);
+        coinCanvas.SetActive(false);
+        
     }
 
     private void OnLoginButtonClicked()
@@ -32,14 +36,28 @@ public class LoginManager : MonoBehaviour
 
         if (ValidateCredentials(username, password))
         {
-            messageText.text = "Login successful!";
-            // Load another scene or perform some action
-            // SceneManager.LoadScene("YourNextScene");
+            // Load the main game scene
+            GameManager.StartGame();
+            LoginCanvas.SetActive(false); // Disable the login canvas
+            microphoneCanvas.SetActive(true);
+            coinCanvas.SetActive(true);
         }
         else
         {
-            messageText.text = "Invalid username or password.";
+            Debug.Log("Invalid credentials");
+            // Show an error message to the user
         }
+    }
+
+    private void OnRegisterButtonClicked()
+    {
+        // Implement registration logic here
+    }
+
+    private bool ValidateCredentials(string username, string password)
+    {
+        // Replace with your own validation logic, e.g., check against a database
+        return username == "1" && password == "1";
     }
 }
 

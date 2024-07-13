@@ -5,7 +5,20 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public static bool isGamePaused = false;
+    public static bool isGamePaused = true;
+    public static bool IsGamePaused
+    {
+        get => isGamePaused;
+        set
+        {
+            if (isGamePaused != value)
+            {
+                isGamePaused = value;
+                OnChange();
+            }
+        }
+    }
+
     public bool isOKButtonClicked = false;
     public int world { get; private set; }
     public int stage { get; private set; }
@@ -32,9 +45,23 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 60;
         StartCoroutine(firebaseManager.GetUserData("user123", OnUserDataReceived));
         NewGame();
+       
     }
+   
 
-    private void Update()
+    /*private void Update()
+    {
+        if (isGamePaused)
+        {
+            Time.timeScale = 0f; // Pause the game
+        }
+        else
+        {
+            Time.timeScale = 1f; // Resume the game
+        }
+    }*/
+
+      public static void OnChange()
     {
         if (isGamePaused)
         {
@@ -45,7 +72,17 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f; // Resume the game
         }
     }
-
+    
+    public static void StopGame()
+    {
+        
+            Time.timeScale = 0f; // Pause the game
+        
+    }
+    public static void StartGame()
+    {
+        Time.timeScale = 1f; // Pause the game
+    }
     private void OnDestroy()
     {
         if (Instance == this)

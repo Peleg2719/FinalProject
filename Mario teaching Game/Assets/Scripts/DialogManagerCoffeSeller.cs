@@ -21,13 +21,13 @@ public class DialogManagerCoffeSeller : MonoBehaviour
     {
         isDialogActive = true;
         dialoguePanel.SetActive(true);
-        GameManager.isGamePaused = true; // Pause the game
+        GameManager.IsGamePaused = true; // Pause the game
     }
 
     public void HideDialogPanel()
     {
         isDialogActive = false;
-        GameManager.isGamePaused = false; // Resume the game
+        GameManager.IsGamePaused = false; // Resume the game
         dialoguePanel.SetActive(false);
     }
 

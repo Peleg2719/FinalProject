@@ -40,7 +40,10 @@ public class HelloWomenScript : MonoBehaviour
         {
             Debug.LogError("StreamingRecognizer component not found!");
         }
-        this.userLevel = GameManager.Instance.UserData.level;
+         GameManager.isGamePaused=true;
+         this.userLevel = GameManager.Instance.UserData.level;
+         GameManager.isGamePaused=true;
+      
     }
 
     void OnTriggerEnter2D(Collider2D other)
