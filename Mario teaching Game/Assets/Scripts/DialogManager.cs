@@ -31,6 +31,7 @@ public class DialogManager : MonoBehaviour
     public void ContinueGame()
     {
         Debug.Log("Continue Game button clicked");
+        GameManager.IsGamePaused = false;
         HideDialogPanel();
     }
 }
