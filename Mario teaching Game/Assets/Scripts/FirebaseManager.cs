@@ -150,6 +150,11 @@ public class FirebaseManager : MonoBehaviour
     }
 }
 
+public enum Language
+{
+   en,
+   es
+}
 [System.Serializable]
 public class UserData
 {
@@ -157,6 +162,8 @@ public class UserData
     public string password;
     public int level;
     public int score;
+    public Language language;
+  
 }
 
 [System.Serializable]

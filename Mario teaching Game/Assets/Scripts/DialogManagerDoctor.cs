@@ -22,13 +22,12 @@ public class DialogManagerDoctor : MonoBehaviour
     {
         isDialogActive = true;
         dialoguePanel.SetActive(true);
-        GameManager.IsGamePaused = true; // Pause the game
+        GameManager.isGamePaused = true; // Pause the game
     }
 
     public void HideDialogPanel()
     {
         isDialogActive = false;
-        GameManager.IsGamePaused = false; // Resume the game
         dialoguePanel.SetActive(false);
     }
 

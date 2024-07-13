@@ -40,9 +40,9 @@ public class HelloWomenScript : MonoBehaviour
         {
             Debug.LogError("StreamingRecognizer component not found!");
         }
-         GameManager.isGamePaused=true;
+     
          this.userLevel = GameManager.Instance.UserData.level;
-         GameManager.isGamePaused=true;
+
       
     }
 
@@ -141,7 +141,9 @@ public class HelloWomenScript : MonoBehaviour
                 Debug.Log("Playing response audio clip.");
                 audioSource.clip = responseAudioClips[this.userLevel + 1];
                 audioSource.Play();
+                GameManager.IsGamePaused = false; // Resume the game
                 StartCoroutine(HideDialogAfterAudio());
+                
             }
             else
             {
@@ -180,6 +182,7 @@ public class HelloWomenScript : MonoBehaviour
         {
             Debug.Log("Hiding dialog panel.");
             dialogManager.HideDialogPanel();
+            GameManager.StartGame();
             OnDestroy();
         }
         else

@@ -25,7 +25,6 @@ public class DialogManager : MonoBehaviour
     public void HideDialogPanel()
     {
         isDialogActive = false;
-        GameManager.IsGamePaused = false; // Resume the game
         dialoguePanel.SetActive(false);
     }
 

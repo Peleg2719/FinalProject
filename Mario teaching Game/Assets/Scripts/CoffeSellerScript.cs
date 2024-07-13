@@ -162,6 +162,7 @@ public class CoffeSellerScript : MonoBehaviour
         {
             Debug.Log("Hiding dialog panel.");
             dialogManager.HideDialogPanel();
+            GameManager.StartGame();
             OnDestroy();
         }
         else

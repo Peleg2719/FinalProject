@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     }*/
 
       public static void OnChange()
-    {
+     {
         if (isGamePaused)
         {
             Time.timeScale = 0f; // Pause the game
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1f; // Resume the game
         }
-    }
+     }
     
     public static void StopGame()
     {

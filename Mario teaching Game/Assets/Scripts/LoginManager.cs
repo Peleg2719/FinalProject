@@ -15,6 +15,7 @@ public class LoginManager : MonoBehaviour
      public GameObject LoginCanvas;
      public GameObject microphoneCanvas;
      public GameObject coinCanvas;
+     public TextMeshProUGUI errorMessage;
 
 
     // Replace this with your own user validation logic
@@ -22,10 +23,11 @@ public class LoginManager : MonoBehaviour
     {
         loginButton.onClick.AddListener(OnLoginButtonClicked);
         registerButton.onClick.AddListener(OnRegisterButtonClicked);
-        GameManager.IsGamePaused = true; // Pause the game
+        GameManager.StopGame();
         LoginCanvas.SetActive(true);
         microphoneCanvas.SetActive(false);
         coinCanvas.SetActive(false);
+        errorMessage.text = ""; // Initialize the error message as empty
         
     }
 
@@ -45,6 +47,7 @@ public class LoginManager : MonoBehaviour
         else
         {
             Debug.Log("Invalid credentials");
+            errorMessage.text = "Invalid username or password. Please try again.";
             // Show an error message to the user
         }
     }
