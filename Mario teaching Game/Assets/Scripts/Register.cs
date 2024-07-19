@@ -38,7 +38,7 @@ public class Register : MonoBehaviour
             string password = passwordInput.text;
 
         // For simplicity, we assume new users start at level 1 with a score of 0 and language set to English
-            firebaseManager.WriteUserData(username, password, 1, 0, 0);
+            firebaseManager.WriteUserData(username, password, 1,1, 0, 0);
             Message.text = "Registration successful! Please log in.";
 		}
          

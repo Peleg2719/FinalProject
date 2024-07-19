@@ -18,6 +18,10 @@ public class LoginManager : MonoBehaviour
     public TextMeshProUGUI errorMessage;
     public FirebaseManager firebaseManager;
 
+    public GameObject CanvasScore;
+
+    public GameObject LanguageCanvas;
+   
 
     // Replace this with your own user validation logic
     private void Start()
@@ -28,17 +32,32 @@ public class LoginManager : MonoBehaviour
         LoginCanvas.SetActive(true);
         microphoneCanvas.SetActive(false);
         coinCanvas.SetActive(false);
+        CanvasScore.SetActive(false);
         errorMessage.text = ""; // Initialize the error message as empty
-
+          if(firebaseManager.userData.username!="")
+        {
+            LoginCanvas.SetActive(false);
+        }
     }
-
+     
+      public void StartAgain()
+    {
+        
+        if(firebaseManager.userData.username!="")
+        {
+            LoginCanvas.SetActive(false);
+            LanguageCanvas.SetActive(true);
+        }
+    }
     private void OnLoginButtonClicked()
     {
+        
         string username = usernameInput.text;
         string password = passwordInput.text;
 
         firebaseManager.ReadUserData(username, userData =>
         {
+            
             if (userData == null)
             {
                 Debug.Log("Invalid credentials");
@@ -47,10 +66,10 @@ public class LoginManager : MonoBehaviour
             if (userData != null && userData.password == password)
             {
                 UserManager.Instance.SetCurrentUser(userData);
-                GameManager.StartGame();
                 LoginCanvas.SetActive(false); // Disable the login canvas
-                microphoneCanvas.SetActive(true);
-                coinCanvas.SetActive(true);
+              
+               
+                
             }
             else
             {
@@ -59,8 +78,8 @@ public class LoginManager : MonoBehaviour
             }
             return;
         });
-        Debug.Log("Invalid credentials");
-        errorMessage.text = "Invalid username or password. Please try again.";
+        
+       
     }
 
 

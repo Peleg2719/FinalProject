@@ -41,7 +41,7 @@ public class UserManager : MonoBehaviour
     {
         if (CurrentUser != null)
         {
-            CurrentUser.level = level;
+            CurrentUser.levelEn = level;
             // You may want to save this data to Firebase here
         }
     }

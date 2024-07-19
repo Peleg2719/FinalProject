@@ -45,7 +45,7 @@ public class bikeriderscript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        this.userLevel = UserManager.Instance.CurrentUser.level;
+        this.userLevel = UserManager.Instance.CurrentUser.levelEn;
         if (other.CompareTag("Player") && !passedAlready)
         {
             GameManager.IsGamePaused = true;

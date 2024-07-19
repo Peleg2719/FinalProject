@@ -10,6 +10,12 @@ public class Player : MonoBehaviour
     public CapsuleCollider2D capsuleCollider { get; private set; }
     public DeathAnimation deathAnimation { get; private set; }
 
+    public FirebaseManager firebaseManager;
+    public PointCounter pointCounter;
+    public LanguageManager1 languageManager1;
+    public GameObject CanvasScore;
+    public ScoreManager scoreManager;
+
     public bool big => bigRenderer.enabled;
     public bool dead => deathAnimation.enabled;
     public bool starpower { get; private set; }
@@ -35,11 +41,44 @@ public class Player : MonoBehaviour
 
     public void Death()
     {
+        var levelEs=1;
+        var levelEn=1;
         smallRenderer.enabled = false;
         bigRenderer.enabled = false;
         deathAnimation.enabled = true;
-
-        GameManager.Instance.ResetLevel(3f);
+        if(languageManager1.Language.Equals("es"))
+        {
+            if(firebaseManager.userData.scoreEs>=50)
+          {
+            levelEs=2;
+          }
+          firebaseManager.WriteUserData(
+          firebaseManager.userData.username, // replace with actual username
+          firebaseManager.userData.password, // replace with actual password
+          firebaseManager.userData.levelEn, // replace with actual level
+          levelEs,
+          firebaseManager.userData.scoreEn, // replace with actual score in English
+          pointCounter.GetCoin()); // replace with actual score in Spanish
+        }
+         else if(languageManager1.Language.Equals("en"))
+        {
+            if(firebaseManager.userData.scoreEn>=50)
+          {
+            levelEn=2;
+          }
+          firebaseManager.WriteUserData(
+          firebaseManager.userData.username, // replace with actual username
+          firebaseManager.userData.password, // replace with actual password
+          levelEn, // replace with actual level
+          firebaseManager.userData.levelEs,
+          pointCounter.GetCoin(),
+          firebaseManager.userData.scoreEs // replace with actual score in English
+          ); 
+        }
+          // Save the user score to Firebase
+        CanvasScore.SetActive(true);
+        scoreManager.StartAgain();
+        //GameManager.Instance.ResetLevel(3f);
     }
 
     public void Grow()

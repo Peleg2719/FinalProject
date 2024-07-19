@@ -24,13 +24,14 @@ public class FirebaseManager : MonoBehaviour
         // ReadQuestionData("Mario");
     }
 
-    public void WriteUserData(string username, string password, int level, int scoreEn, int scoreEs)
+    public void WriteUserData(string username, string password, int levelEn,int levelEs, int scoreEn, int scoreEs)
     {
         userData = new UserData
         {
             username = username,
             password = password,
-            level = level,
+            levelEn = levelEn,
+            levelEs=levelEs,
             scoreEn = scoreEn,
             scoreEs = scoreEs
         };
@@ -51,24 +52,45 @@ public class FirebaseManager : MonoBehaviour
         StartCoroutine(PostRequest("questions/" + characterName, jsonData));
     }
 
-    public void ReadUserData(string username, System.Action<UserData> callback)
+  public void ReadUserData(string username, System.Action<UserData> callback)
+{
+    Debug.Log("Reading user data for username: " + username); // Debug log to see what username is being passed
+    StartCoroutine(GetRequest("user_data/" + username, jsonData =>
     {
-        StartCoroutine(GetRequest("user_data/" + username, jsonData =>
+        if (string.IsNullOrEmpty(jsonData))
         {
-            UserData userData = JsonUtility.FromJson<UserData>(jsonData);
-            if (userData != null)
+            Debug.LogError("No data received from Firebase for username: " + username); // Log if no data is received
+            callback?.Invoke(null);
+            return;
+        }
+
+        Debug.Log("Received JSON data: " + jsonData); // Log the received JSON data for debugging
+
+        UserData userData = JsonUtility.FromJson<UserData>(jsonData);
+        if (userData != null)
+        {
+            Debug.Log("Parsed UserData: " + userData.username + ", " + userData.password); // Log parsed user data
+            if (userData.username == username)
             {
                 UserManager.Instance.SetCurrentUser(userData);
-                // Debug.Log($"User data set for {userData.username}, Level: {userData.level}");
-                Debug.Log($"User data set for {UserManager.Instance.CurrentUser.username}, Level: {UserManager.Instance.CurrentUser.level}");
+                Debug.Log($"User data set for {userData.username}, LevelEn: {userData.levelEn}, LevelEs: {userData.levelEs}");
+                callback?.Invoke(userData);
+                this.userData=userData;
+                
             }
             else
             {
-                Debug.LogError($"Failed to parse user data for {username}");
+                Debug.LogError($"Username mismatch. Requested: {username}, Received: {userData.username}");
+                callback?.Invoke(null);
             }
-            callback?.Invoke(userData);
-        }));
-    }
+        }
+        else
+        {
+            Debug.LogError($"Failed to parse user data for {username}");
+            callback?.Invoke(null);
+        }
+    }));
+}
 
     public void ReadQuestionData(string characterName)
     {
@@ -117,7 +139,7 @@ public class FirebaseManager : MonoBehaviour
             {
                 UserManager.Instance.SetCurrentUser(this.userData);
                 // Debug.Log($"User data set for {this.userData.username}, Level: {this.userData.level}");
-                Debug.Log($"User data set for {UserManager.Instance.CurrentUser.level}, Level: {UserManager.Instance.CurrentUser.level}");
+              //  Debug.Log($"User data set for {UserManager.Instance.CurrentUser.level}, Level: {UserManager.Instance.CurrentUser.level}");
             }
             else
             {
@@ -190,7 +212,8 @@ public class UserData
 {
     public string username;
     public string password;
-    public int level;
+    public int levelEn;
+    public int levelEs;
     public int scoreEn;
     public int scoreEs;
 

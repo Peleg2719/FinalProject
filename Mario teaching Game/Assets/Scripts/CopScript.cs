@@ -47,7 +47,7 @@ public class CopScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         // Check if UserManager.Instance exists and has CurrentUser data
-        this.userLevel = UserManager.Instance.CurrentUser.level;
+        this.userLevel = UserManager.Instance.CurrentUser.levelEn;
         if (other.CompareTag("Player") && !passedAlready)
         {
             GameManager.IsGamePaused = true;

@@ -12,13 +12,13 @@ public class PointCounter : MonoBehaviour
     
     void Start()
     {
-        ResetPoints();
+        
         UpdatePointsDisplay();
 
     }
-      public void ResetPoints()
+      public void ResetPoints(int point)
     {
-        points = 0;
+        points = point;
         UpdatePointsDisplay(); // Update display after resetting
     }
 
@@ -40,5 +40,9 @@ public class PointCounter : MonoBehaviour
     {
        
         pointsText.text = points.ToString();
+    }
+    public int GetCoin()
+    {
+       return int.Parse(pointsText.text);
     }
 }
