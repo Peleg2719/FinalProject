@@ -3867,10 +3867,14 @@ MonoBehaviour:
   dialogueAudioClips:
   - {fileID: 8300000, guid: ca8dcf69fbc86d14193c3aaede441d83, type: 3}
   - {fileID: 8300000, guid: e2031abc965a1df4a9f670ef1a741039, type: 3}
+  - {fileID: 8300000, guid: 238898221bc27054c8b379c50c37ed4f, type: 3}
+  - {fileID: 8300000, guid: d2b22903edc2ab64ebd8b02908f594c8, type: 3}
   responseAudioClips:
   - {fileID: 8300000, guid: 06389c50a9e9d164085f399abfecd59c, type: 3}
   - {fileID: 8300000, guid: 3330bf31165acec4b98896e960b5efc4, type: 3}
-  notSuccessResponseAudioClipBikeRider: {fileID: 8300000, guid: dc5977c2e5727c64d828d840d056510a, type: 3}
+  - {fileID: 8300000, guid: c82420a83768d634d89fb3ce4d73a17a, type: 3}
+  notSuccessResponseAudioClip: {fileID: 8300000, guid: dc5977c2e5727c64d828d840d056510a, type: 3}
+  notSuccessResponseAudioClipSpanish: {fileID: 8300000, guid: 085b21fbed6768140ad174f7491055b1, type: 3}
   changeImage: {fileID: 1787932351}
   image: {fileID: 0}
 --- !u!114 &308159346
@@ -5128,6 +5132,8 @@ GameObject:
   m_Component:
   - component: {fileID: 410582200}
   - component: {fileID: 410582201}
+  - component: {fileID: 410582203}
+  - component: {fileID: 410582202}
   m_Layer: 0
   m_Name: ChooshingLanguageManager
   m_TagString: Untagged
@@ -5170,6 +5176,130 @@ MonoBehaviour:
   pointCounter: {fileID: 199801318}
   firebaseManager: {fileID: 665550971}
   streamingRecognizer: {fileID: 0}
+--- !u!114 &410582202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410582199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f43be3dcef461f9ee3aa85dd4204bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startOnAwake: 1
+  returnInterimResults: 1
+  enableDebugLogging: 0
+  onStartListening:
+    m_PersistentCalls:
+      m_Calls: []
+  onStopListening:
+    m_PersistentCalls:
+      m_Calls: []
+  onFinalResult:
+    m_PersistentCalls:
+      m_Calls: []
+  onInterimResult:
+    m_PersistentCalls:
+      m_Calls: []
+  _microphoneName: Microphone (Realtek(R) Audio)
+--- !u!82 &410582203
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410582199}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &427594704 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3249715635291859842, guid: e62038c0504cf124bb51628b480df8f0, type: 3}
@@ -7369,7 +7499,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 631737595}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: b3d3baa76ebf4e54581cc3c8c5ec1bbd, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &631737595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8333,6 +8475,7 @@ GameObject:
   - component: {fileID: 712853456}
   - component: {fileID: 712853455}
   - component: {fileID: 712853454}
+  - component: {fileID: 712853458}
   m_Layer: 0
   m_Name: Stage
   m_TagString: Untagged
@@ -8528,6 +8671,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &712853458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712853452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e7ecebfe64c8864392699a636460c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startOnAwake: 1
+  returnInterimResults: 1
+  enableDebugLogging: 0
+  onStartListening:
+    m_PersistentCalls:
+      m_Calls: []
+  onStopListening:
+    m_PersistentCalls:
+      m_Calls: []
+  onFinalResult:
+    m_PersistentCalls:
+      m_Calls: []
+  onInterimResult:
+    m_PersistentCalls:
+      m_Calls: []
+  _microphoneName: 
 --- !u!1001 &717499323
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11348,10 +11519,14 @@ MonoBehaviour:
   dialogueAudioClips:
   - {fileID: 8300000, guid: 7a27772c8af6a2142a3c95e8c89b7173, type: 3}
   - {fileID: 8300000, guid: 194a17c1d563722418b2998d2bbd44f5, type: 3}
+  - {fileID: 8300000, guid: ebb4212eded18274bb48e3af120acebe, type: 3}
+  - {fileID: 8300000, guid: 7cc88406b7aaedd4eac069c1405c08fe, type: 3}
   responseAudioClips:
   - {fileID: 8300000, guid: 25b37a05511e7904dbdb36e065e07222, type: 3}
   - {fileID: 8300000, guid: e579b75f16e13ce4eb69dac80aebdc67, type: 3}
+  - {fileID: 8300000, guid: b76d9aff12aa6c54ead90847680bf936, type: 3}
   notSuccessResponseAudioClip: {fileID: 8300000, guid: d34eb322437b91d4e99404c2b580d520, type: 3}
+  notSuccessResponseAudioClipSpanish: {fileID: 8300000, guid: 4a54e154bbc58b54ca9ca9e112c99f03, type: 3}
   changeImage: {fileID: 1787932351}
   image: {fileID: 0}
 --- !u!114 &957508563
@@ -12447,6 +12622,7 @@ MonoBehaviour:
   dialogueAudioClips: []
   responseAudioClips: []
   notSuccessResponseAudioClip: {fileID: 0}
+  notSuccessResponseAudioClipSpanish: {fileID: 0}
   changeImage: {fileID: 0}
   image: {fileID: 0}
 --- !u!1001 &1050009347

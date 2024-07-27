@@ -25,6 +25,19 @@ public class GameManager : MonoBehaviour
     public int lives { get; private set; }
     public int coins { get; private set; }
     public FirebaseManager firebaseManager;
+    private static string _language = "en";
+    public static string Language
+    {
+        get => _language;
+        set
+        {
+            if (_language != value)
+            {
+                _language = value;
+                OnLanguageChange();
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -70,8 +83,13 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f; // Resume the game
         }
     }
+    private static void OnLanguageChange()
+    {
+        // Handle language change logic here
+        Debug.Log($"Language changed to: {_language}");
+    }
 
-    public static void StopGame()
+public static void StopGame()
     {
 
         Time.timeScale = 0f; // Pause the game

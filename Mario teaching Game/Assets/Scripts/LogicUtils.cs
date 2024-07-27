@@ -7,6 +7,10 @@ public static class LogicUtils
 {
     public static int CalculateAccuracyPercentage(string expected, string recognized)
     {
+        // Convert both strings to lowercase
+        expected = expected.ToLower();
+        recognized = recognized.ToLower();
+
         // Split recognized and expected strings into arrays of words
         string[] recognizedWords = recognized.Split(new char[] { ' ', ',', '.', '?', '!', ';' }, System.StringSplitOptions.RemoveEmptyEntries);
         string[] expectedWords = expected.Split(new char[] { ' ', ',', '.', '?', '!', ';' }, System.StringSplitOptions.RemoveEmptyEntries);
@@ -20,4 +24,5 @@ public static class LogicUtils
 
         return percentAccuracy;
     }
+
 }

@@ -49,8 +49,8 @@ public class LanguageManager1 : MonoBehaviour
      ChooshLangugaeCanvas.SetActive(false); // Disable the login canvas
      microphoneCanvas.SetActive(true);
      coinCanvas.SetActive(true);
-     Language="es";
-     pointCounter.ResetPoints(firebaseManager.userData.scoreEs);
+     GameManager.Language = "es";
+        pointCounter.ResetPoints(firebaseManager.userData.scoreEs);
      //streamingRecognizer.SetLanguageCode("es"); // Set language to Spanish
      
    }
@@ -62,8 +62,8 @@ public class LanguageManager1 : MonoBehaviour
         ChooshLangugaeCanvas.SetActive(false); // Disable the login canvas
         microphoneCanvas.SetActive(true);
         coinCanvas.SetActive(true);
-        Language="en";
-         pointCounter.ResetPoints(firebaseManager.userData.scoreEn);
+        GameManager.Language = "en";
+        pointCounter.ResetPoints(firebaseManager.userData.scoreEn);
    }
     // Update is called once per frame
     void Update()

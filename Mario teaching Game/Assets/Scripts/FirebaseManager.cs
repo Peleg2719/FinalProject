@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -11,13 +11,7 @@ public class FirebaseManager : MonoBehaviour
 
     void Start()
     {
-        // WriteUserData("user123", "password123", 1, 0);
-        //WriteQuestionData("question_1_level_2", "Hi mario! Do you have any plans for today? ", "yes im planing to learn english and talk with the pepople i will meet later", 2);
-        // WriteQuestionData("question_4", "Hi Mario, what do you want to report?", "My wallet was stolen, I need help", 1);
-        // WriteQuestionData("question_2_level_2", "Hey Mario, what's an important tip for finding your way to the clinic?", "Remember to follow the street signs and ask locals if you get confused", 2);
-        // WriteQuestionData("question_3_level_2", "Hi Mario, can you tell me what happened to your arm?", "Yes, I fell while riding my bike and landed on my arm, which is now hurting a lot", 2);
-        // WriteQuestionData("question_4_level_2", "Hi Mario, can you describe what happened when your wallet was stolen?", "My wallet was taken while I was walking through the park. I need help to report it and find the thief", 2);
-        // WriteQuestionData("question_5_level_2", "Hi Mario, would you like to customize your coffee order today?", "Yes, I would like a fat-free coffee with one shot of espresso with cinnamon please", 2);
+ //WriteQuestionData("question_5_level_2_es", "Hola Mario, ¿te gustaría personalizar tu pedido de café hoy?", "Sí, me gustaría un café sin grasa con un shot de espresso y canela, por favor", 2);
 
 
         // ReadUserData("user123");

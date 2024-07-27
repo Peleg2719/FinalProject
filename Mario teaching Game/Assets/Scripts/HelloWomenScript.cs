@@ -10,9 +10,11 @@ public class HelloWomenScript : MonoBehaviour
     public DialogManager dialogManager;
     public PointCounter pointCounter;
     private StreamingRecognizer recognizer;
+    private StreamingRecognizerSpanish spanishRecognizer;
     public AudioClip[] dialogueAudioClips;
     public AudioClip[] responseAudioClips;
     public AudioClip notSuccessResponseAudioClip;
+    public AudioClip notSuccessResponseAudioClipSpanish;
     private AudioSource audioSource;
     public ChangImage changeImage;
     public Image image;
@@ -36,18 +38,31 @@ public class HelloWomenScript : MonoBehaviour
             Debug.LogError("No initial audio clip assigned!");
         }
 
+        spanishRecognizer = FindObjectOfType<StreamingRecognizerSpanish>();
+        if (recognizer == null)
+        {
+            Debug.LogError("StreamingRecognizerSpanish component not found!");
+        }
         recognizer = FindObjectOfType<StreamingRecognizer>();
         if (recognizer == null)
         {
             Debug.LogError("StreamingRecognizer component not found!");
         }
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         // Check if UserManager.Instance exists and has CurrentUser data
-        this.userLevel = UserManager.Instance.CurrentUser.levelEn;
-        if (other.CompareTag("Player") && !passedAlready)
+        if (GameManager.Language == "en")
+        {
+            this.userLevel = UserManager.Instance.CurrentUser.levelEn;
+        }
+        else
+        {
+            this.userLevel = UserManager.Instance.CurrentUser.levelEs;
+        }
+        if (other.CompareTag("Player") && this.passedAlready == false)
         {
             GameManager.IsGamePaused = true;
             Debug.Log("Player entered trigger area.");
@@ -67,11 +82,25 @@ public class HelloWomenScript : MonoBehaviour
         // Select audio clip based on user level
         if (this.userLevel == 1)
         {
-            yield return StartCoroutine(firebaseManager.GetQuestionData("question_1", OnQuestionDataReceived));
+            if (GameManager.Language == "en")
+            {
+                yield return StartCoroutine(firebaseManager.GetQuestionData("question_1", OnQuestionDataReceived));
+            }
+            else
+            {
+                yield return StartCoroutine(firebaseManager.GetQuestionData("question_1_es", OnQuestionDataReceived));
+            }
         }
         else if (this.userLevel == 2)
         {
-            yield return StartCoroutine(firebaseManager.GetQuestionData("question_1_level_2", OnQuestionDataReceived));
+            if (GameManager.Language == "en")
+            {
+                yield return StartCoroutine(firebaseManager.GetQuestionData("question_1_level_2", OnQuestionDataReceived));
+            }
+            else
+            {
+                yield return StartCoroutine(firebaseManager.GetQuestionData("question_1_level_2_es", OnQuestionDataReceived));
+            }
         }
     }
 
@@ -88,7 +117,28 @@ public class HelloWomenScript : MonoBehaviour
             // Select audio clip based on user level
             if (audioSource != null)
             {
-                audioSource.clip = dialogueAudioClips[this.userLevel - 1];
+                if (GameManager.Language == "en")
+                {
+                    if (this.userLevel == 1)
+                    {
+                        audioSource.clip = dialogueAudioClips[0];
+                    }
+                    else
+                    {
+                        audioSource.clip = dialogueAudioClips[1];
+                    }
+                }
+                else
+                {
+                    if (this.userLevel == 1)
+                    {
+                        audioSource.clip = dialogueAudioClips[2];
+                    }
+                    else
+                    {
+                        audioSource.clip = dialogueAudioClips[3];
+                    }
+                }
                 audioSource.Play();
                 StartCoroutine(StartListeningAfterAudio());
             }
@@ -108,18 +158,33 @@ public class HelloWomenScript : MonoBehaviour
     {
         yield return new WaitWhile(() => audioSource.isPlaying);
 
-        if (recognizer != null)
+        changeImage.ChangeImageSpriteToRecord();
+
+        if (GameManager.Language == "en")
         {
-            changeImage.ChangeImageSpriteToRecord();
-            recognizer.onFinalResult.AddListener(OnSpeechRecognized);
-            recognizer.StartListening();
+            if (recognizer != null)
+            {
+                recognizer.onFinalResult.AddListener(OnSpeechRecognized);
+                recognizer.StartListening();
+            }
+            else
+            {
+                Debug.LogError("English Recognizer is null when trying to start listening.");
+            }
         }
-        else
+        else if (GameManager.Language == "es")
         {
-            Debug.LogError("Recognizer is null when trying to start listening.");
+            if (spanishRecognizer != null)
+            {
+                spanishRecognizer.onFinalResult.AddListener(OnSpeechRecognized);
+                spanishRecognizer.StartListening();
+            }
+            else
+            {
+                Debug.LogError("Spanish Recognizer is null when trying to start listening.");
+            }
         }
     }
-
     void OnSpeechRecognized(string text)
     {
         Debug.Log("Speech Recognized: " + text);
@@ -127,17 +192,37 @@ public class HelloWomenScript : MonoBehaviour
         int percentAccuracyInt = LogicUtils.CalculateAccuracyPercentage(expectedAnswer, text);
         if (dialogueText != null && percentAccuracyInt >= 80)
         {
-            Debug.Log("Correct speech recognized.");
-            passedAlready = true;
-            dialogueText.text = "You said it perfectly!";
+            this.passedAlready = true;
+            if (GameManager.Language == "en")
+            {
+                dialogueText.text = "You said it perfectly!";
+            }
+            else if (GameManager.Language == "es")
+            {
+                dialogueText.text = "¡Lo dijiste perfectamente!";
+            }
             dialogueText.color = Color.green;
             pointCounter.UpdateCoin(5);
 
             // Select response audio clip based on user level
-            if (this.userLevel <= responseAudioClips.Length && audioSource != null)
+            if (audioSource != null)
             {
                 Debug.Log("Playing response audio clip.");
-                audioSource.clip = responseAudioClips[this.userLevel - 1];
+                if (GameManager.Language == "en")
+                {
+                    if (this.userLevel == 1)
+                    {
+                        audioSource.clip = responseAudioClips[0];
+                    }
+                    else
+                    {
+                        audioSource.clip = responseAudioClips[1];
+                    }
+                }
+                else
+                {
+                    audioSource.clip = responseAudioClips[2];
+                }
                 audioSource.Play();
                 GameManager.IsGamePaused = false; // Resume the game
                 StartCoroutine(HideDialogAfterAudio());
@@ -150,13 +235,25 @@ public class HelloWomenScript : MonoBehaviour
         }
         else
         {
-            dialogueText.text = $"Your Score: {percentAccuracyInt}%";
-            Debug.Log($"Speech did not match expected response: {text}.");
-            Debug.Log("Playing not successful response audio clip.");
+            if (GameManager.Language == "en")
+            {
+                dialogueText.text = $"Your Score: {percentAccuracyInt}%";
+            }
+            else if (GameManager.Language == "es")
+            {
+                dialogueText.text = $"Tu Puntaje: {percentAccuracyInt}%";
+            }
 
             if (notSuccessResponseAudioClip != null && audioSource != null)
             {
-                audioSource.clip = notSuccessResponseAudioClip;
+                if (GameManager.Language == "en")
+                {
+                    audioSource.clip = notSuccessResponseAudioClip;
+                }
+                else if (GameManager.Language == "es")
+                {
+                    audioSource.clip = notSuccessResponseAudioClipSpanish;
+                }
                 audioSource.Play();
                 StartCoroutine(HideDialogAfterAudio());
                 pointCounter.UpdateCoin(-1);
@@ -168,7 +265,14 @@ public class HelloWomenScript : MonoBehaviour
         }
 
         changeImage.ChangeImageSpriteToNotRecord();
-        recognizer.StopListening();
+        if (GameManager.Language == "en")
+        {
+            recognizer.StopListening();
+        }
+        else
+        {
+            spanishRecognizer.StopListening();
+        }
     }
 
     IEnumerator HideDialogAfterAudio()
@@ -191,11 +295,18 @@ public class HelloWomenScript : MonoBehaviour
 
     void OnDestroy()
     {
+        changeImage.ChangeImageSpriteToNotRecord();
+
         if (recognizer != null)
         {
-            changeImage.ChangeImageSpriteToNotRecord();
             recognizer.StopListening();
             recognizer.onFinalResult.RemoveListener(OnSpeechRecognized);
         }
-    }
+
+        if (spanishRecognizer != null)
+        {
+            spanishRecognizer.StopListening();
+            spanishRecognizer.onFinalResult.RemoveListener(OnSpeechRecognized);
+        }
+    } 
 }
