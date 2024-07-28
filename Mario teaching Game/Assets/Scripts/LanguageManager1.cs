@@ -51,6 +51,7 @@ public class LanguageManager1 : MonoBehaviour
      coinCanvas.SetActive(true);
      GameManager.Language = "es";
         pointCounter.ResetPoints(firebaseManager.userData.scoreEs);
+        Language="es";
      //streamingRecognizer.SetLanguageCode("es"); // Set language to Spanish
      
    }
@@ -64,6 +65,7 @@ public class LanguageManager1 : MonoBehaviour
         coinCanvas.SetActive(true);
         GameManager.Language = "en";
         pointCounter.ResetPoints(firebaseManager.userData.scoreEn);
+        Language="en";
    }
     // Update is called once per frame
     void Update()
