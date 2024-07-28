@@ -49,6 +49,7 @@ public class CoffeSellerScript : MonoBehaviour
         if (other.CompareTag("Player") && !passedAlready)
         {
             GameManager.IsGamePaused = true;
+            GameManager.StopGame();
             Debug.Log("Player entered trigger area.");
             if (dialogManager != null && firebaseManager != null)
             {

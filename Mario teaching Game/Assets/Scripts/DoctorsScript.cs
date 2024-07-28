@@ -50,6 +50,7 @@ public class DoctorsScript : MonoBehaviour
         this.userLevel = UserManager.Instance.CurrentUser.levelEn;
         if (other.CompareTag("Player") && !passedAlready)
         {
+             GameManager.StopGame();
             Debug.Log("Player entered trigger area.");
             if (dialogManager != null && firebaseManager != null)
             {

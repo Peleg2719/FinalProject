@@ -64,6 +64,7 @@ public class bikeriderscript : MonoBehaviour
         if (other.CompareTag("Player") && !passedAlready)
         {
             GameManager.IsGamePaused = true;
+            GameManager.StopGame();
             Debug.Log("Player entered trigger area.");
             if (dialogManager != null && firebaseManager != null)
             {
@@ -198,7 +199,7 @@ public class bikeriderscript : MonoBehaviour
             }
             else if (GameManager.Language == "es")
             {
-                dialogueText.text = "¡Lo dijiste perfectamente!";
+                dialogueText.text = "ï¿½Lo dijiste perfectamente!";
             }
             dialogueText.color = Color.green;
             pointCounter.UpdateCoin(5);
