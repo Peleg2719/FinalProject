@@ -62,10 +62,10 @@ public class HelloWomenScript : MonoBehaviour
         {
             this.userLevel = UserManager.Instance.CurrentUser.levelEs;
         }
-         if (other.CompareTag("Player") && this.passedAlready == false)
+        if (other.CompareTag("Player") && this.passedAlready == false)
         {
             GameManager.IsGamePaused = true;
-             GameManager.StopGame();
+            GameManager.StopGame();
             Debug.Log("Player entered trigger area.");
             if (dialogManager != null && firebaseManager != null)
             {
@@ -309,5 +309,5 @@ public class HelloWomenScript : MonoBehaviour
             spanishRecognizer.StopListening();
             spanishRecognizer.onFinalResult.RemoveListener(OnSpeechRecognized);
         }
-    } 
+    }
 }

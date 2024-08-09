@@ -11809,10 +11809,14 @@ MonoBehaviour:
   dialogueAudioClips:
   - {fileID: 8300000, guid: cece9090399bb33438643885073d1f4a, type: 3}
   - {fileID: 8300000, guid: dadbc58b7971e9e40ae9b84067e2c093, type: 3}
+  - {fileID: 8300000, guid: 5cfe36a41a2df6446a9822fba8faf0c1, type: 3}
+  - {fileID: 8300000, guid: afc1b7a2eccb8f04499d43c3c2931f50, type: 3}
   responseAudioClips:
   - {fileID: 8300000, guid: 3f2e5fa80b787f641b36262694e1cfb5, type: 3}
   - {fileID: 8300000, guid: f7c35844772338c438f7bb251b971371, type: 3}
+  - {fileID: 8300000, guid: fdae338deebaaa04784fe9112f99184d, type: 3}
   notSuccessResponseAudioClipCoffeSeller: {fileID: 8300000, guid: c80ecfd98bb01a7428a06c0045458fd7, type: 3}
+  notSuccessResponseAudioClipSpanish: {fileID: 8300000, guid: a0f88d4b4bb32cf46b56aa5b16d3ca88, type: 3}
   changeImage: {fileID: 1787932351}
   image: {fileID: 0}
 --- !u!114 &968703605
@@ -17421,10 +17425,14 @@ MonoBehaviour:
   dialogueAudioClips:
   - {fileID: 8300000, guid: 2cdf6d27245db4348870505dd19d8ef9, type: 3}
   - {fileID: 8300000, guid: 4101b42d82517a24ebf763ff7b3340e2, type: 3}
+  - {fileID: 8300000, guid: 7ae10317d42377f40978d3d1ab6ea6df, type: 3}
+  - {fileID: 8300000, guid: 49c18d6c5b79986469e1038d6fca2ae3, type: 3}
   responseAudioClips:
   - {fileID: 8300000, guid: 7b8bff71f805e044fb68b03a108f7625, type: 3}
   - {fileID: 8300000, guid: 1e1de57f30b7c4b43b51f7858823f540, type: 3}
+  - {fileID: 8300000, guid: 9cbd0b3f280c5614bb96053a22c4eaec, type: 3}
   notSuccessResponseAudioClipCop: {fileID: 8300000, guid: 357a3fbd9a2f3bd4eaa65e9b76996b14, type: 3}
+  notSuccessResponseAudioClipSpanish: {fileID: 8300000, guid: dfea4343c346ca94daea51f58a71097b, type: 3}
   changeImage: {fileID: 1787932351}
   image: {fileID: 0}
 --- !u!114 &1471177913
@@ -21744,10 +21752,14 @@ MonoBehaviour:
   dialogueAudioClips:
   - {fileID: 8300000, guid: 1efbae65e6ba8f44ca4f022e57bd2ab7, type: 3}
   - {fileID: 8300000, guid: e5ba6ef7132b4ed49995a3b0063cba39, type: 3}
+  - {fileID: 8300000, guid: 94fc37b485c6e9142935248399bf21dc, type: 3}
+  - {fileID: 8300000, guid: 725c305b9d9ce9c4cab6c00436d3c1ac, type: 3}
   responseAudioClips:
   - {fileID: 8300000, guid: db62518041777e740af954aaf2d41db8, type: 3}
   - {fileID: 8300000, guid: 79f1c4bea1c96f846b7e32682f5ac0d6, type: 3}
+  - {fileID: 8300000, guid: a993d899ba8b72d4a9f38e260b36f12f, type: 3}
   notSuccessResponseAudioClipDoctor: {fileID: 8300000, guid: cb9d29df95b58eb408468dba93a9909a, type: 3}
+  notSuccessResponseAudioClipSpanish: {fileID: 8300000, guid: a8c78553518d60f45a54a7af8a3fc56c, type: 3}
   changeImage: {fileID: 1787932351}
   image: {fileID: 0}
 --- !u!82 &1862309875
