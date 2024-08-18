@@ -199,7 +199,7 @@ public class bikeriderscript : MonoBehaviour
             }
             else if (GameManager.Language == "es")
             {
-                dialogueText.text = "�Lo dijiste perfectamente!";
+                dialogueText.text = "Lo dijiste perfectamente!";
             }
             dialogueText.color = Color.green;
             pointCounter.UpdateCoin(5);
@@ -224,7 +224,7 @@ public class bikeriderscript : MonoBehaviour
                     audioSource.clip = responseAudioClips[3];
                 }
                 audioSource.Play();
-                GameManager.IsGamePaused = false; // Resume the game
+                 GameManager.StartGame(); // Resume the game
                 StartCoroutine(HideDialogAfterAudio());
 
             }

@@ -198,7 +198,7 @@ public class DoctorsScript : MonoBehaviour
             }
             else if (GameManager.Language == "es")
             {
-                dialogueText.text = "�Lo dijiste perfectamente!";
+                dialogueText.text = "Lo dijiste perfectamente!";
             }
             dialogueText.color = Color.green;
             pointCounter.UpdateCoin(5);
