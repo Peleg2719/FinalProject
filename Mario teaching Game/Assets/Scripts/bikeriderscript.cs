@@ -221,7 +221,7 @@ public class bikeriderscript : MonoBehaviour
                 }
                 else
                 {
-                    audioSource.clip = responseAudioClips[3];
+                    audioSource.clip = responseAudioClips[2];
                 }
                 audioSource.Play();
                  GameManager.StartGame(); // Resume the game

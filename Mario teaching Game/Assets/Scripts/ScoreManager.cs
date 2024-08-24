@@ -30,7 +30,15 @@ public class ScoreManager : MonoBehaviour
         
         ExitButton.onClick.AddListener(OnExitButtonClicked);
         PlayAgainButton.onClick.AddListener(OnPlayAgainButtonClicked);
-        textCoin.text="You have: "+pointCounter.GetCoin()+" Amount of coins.";
+        if(languageManager1.Language.Equals("es"))
+        {
+             textCoin.text="You have: "+pointCounter.GetCoin()+$" Amount of coins.\n Your level is:{firebaseManager.userData.levelEs}";
+        }
+        else
+        {
+                textCoin.text="You have: "+pointCounter.GetCoin()+$" Amount of coins.\n Your level is:{firebaseManager.userData.levelEn}";
+        }
+        
         microphoneCanvas.SetActive(false);
         coinCanvas.SetActive(false);
     }
@@ -38,7 +46,34 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        textCoin.text="You have: "+pointCounter.GetCoin()+" Amount of coins.";
+        
+        if(languageManager1.Language.Equals("es"))
+        {
+           if(firebaseManager.userData.levelEs==1)
+           {
+                  textCoin.text="Spanish game:\n-You have: "+pointCounter.GetCoin()+$" Amount of coins.\n-Your level is:{firebaseManager.userData.levelEs}.\nYou have {50-pointCounter.GetCoin()} more points left to reach level 2!";
+           } 
+           else
+           {
+                  textCoin.text="Spanish game:\n-You have: "+pointCounter.GetCoin()+$" Amount of coins.\n-Your level is:{firebaseManager.userData.levelEs}.";
+
+           }
+          
+        }
+        else
+        {
+            if(firebaseManager.userData.levelEn==1)
+            {
+                textCoin.text="-English game:\n-You have: "+pointCounter.GetCoin()+$" Amount of coins.\nYour level is:{firebaseManager.userData.levelEn}.\nYou have {50-pointCounter.GetCoin()} more points left to reach level 2!";
+
+            }
+            else
+            {
+                textCoin.text="-English game:\n-You have: "+pointCounter.GetCoin()+$" Amount of coins.\nYour level is:{firebaseManager.userData.levelEn}.";
+
+            }
+              
+        }
         
     }
     public void StartAgain()
