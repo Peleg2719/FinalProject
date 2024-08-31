@@ -24,8 +24,13 @@ public class HelloWomenScript : MonoBehaviour
     private GameManager gameManager;
     private int userLevel; // Default user level
 
+    public Button ShowTextBtn;
+    private string fullquestionData;
+    private bool HasShowTextclick;
+
     void Start()
     {
+        ShowTextBtn.onClick.AddListener(OnShowTextBtn);
         firebaseManager = FindObjectOfType<FirebaseManager>();
         if (firebaseManager == null)
         {
@@ -109,7 +114,8 @@ public class HelloWomenScript : MonoBehaviour
     {
         if (questionData != null)
         {
-            dialogueText.text = questionData.question + "\n\nSay:\n" + questionData.answer;
+            fullquestionData=questionData.question + "\n\nSay:\n" + questionData.answer;
+            dialogueText.text = "\n\nSay:\n" + questionData.answer;
             dialogueText.fontSize = 30;
             expectedAnswer = questionData.answer;
 
@@ -194,6 +200,7 @@ public class HelloWomenScript : MonoBehaviour
         if (dialogueText != null && percentAccuracyInt >= 80)
         {
             this.passedAlready = true;
+            ShowTextBtn.gameObject.SetActive(false);
             if (GameManager.Language == "en")
             {
                 dialogueText.text = "You said it perfectly!";
@@ -258,6 +265,8 @@ public class HelloWomenScript : MonoBehaviour
                 audioSource.Play();
                 StartCoroutine(HideDialogAfterAudio());
                 pointCounter.UpdateCoin(-1);
+                  HasShowTextclick=false;
+                 ShowTextBtn.GetComponentInChildren<TextMeshProUGUI>().text="Show Text";
             }
             else
             {
@@ -309,5 +318,33 @@ public class HelloWomenScript : MonoBehaviour
             spanishRecognizer.StopListening();
             spanishRecognizer.onFinalResult.RemoveListener(OnSpeechRecognized);
         }
+    }
+
+    public void OnShowTextBtn()
+    {
+         var text= fullquestionData;
+         if(!HasShowTextclick)
+         {
+                 dialogueText.text=fullquestionData;
+                 HasShowTextclick=true;
+                 ShowTextBtn.GetComponentInChildren<TextMeshProUGUI>().text="Hide Text";
+         }
+         else
+         {
+               // Split the string to separate the question and the rest
+         string[] parts = text.Split(new string[] { "\n\nSay:\n" }, 0);
+
+         // The first part is the question
+         string questionText = parts[0];
+
+         // The rest of the sentence after removing the question
+         string sentenceWithoutQuestion = "\n\nSay:\n" + parts[1];
+          dialogueText.text=sentenceWithoutQuestion;
+          ShowTextBtn.GetComponentInChildren<TextMeshProUGUI>().text="Show Text";
+           HasShowTextclick=false;
+         }
+        
+       
+        
     }
 }
