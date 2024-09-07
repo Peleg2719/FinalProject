@@ -10037,7 +10037,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOKButtonClicked: 0
-  firebaseManager: {fileID: 0}
 --- !u!4 &742341785
 Transform:
   m_ObjectHideFlags: 0
@@ -27228,6 +27227,18 @@ PrefabInstance:
       propertyPath: castle
       value: 
       objectReference: {fileID: 1768761168}
+    - target: {fileID: 2938452933781992828, guid: 0321727fc4f2a09458753c8f9f0ac24d, type: 3}
+      propertyPath: pointCounter
+      value: 
+      objectReference: {fileID: 199801318}
+    - target: {fileID: 2938452933781992828, guid: 0321727fc4f2a09458753c8f9f0ac24d, type: 3}
+      propertyPath: firebaseManager
+      value: 
+      objectReference: {fileID: 665550971}
+    - target: {fileID: 2938452933781992828, guid: 0321727fc4f2a09458753c8f9f0ac24d, type: 3}
+      propertyPath: languageManager1
+      value: 
+      objectReference: {fileID: 410582201}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0321727fc4f2a09458753c8f9f0ac24d, type: 3}
 --- !u!1001 &2977163765964061661

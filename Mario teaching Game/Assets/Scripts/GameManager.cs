@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     public int stage { get; private set; }
     public int lives { get; private set; }
     public int coins { get; private set; }
-    public FirebaseManager firebaseManager;
     private static string _language = "en";
     public static string Language
     {
@@ -118,6 +117,7 @@ public static void StopGame()
     public void GameOver()
     {
         NewGame();
+        
     }
 
     public void LoadLevel(int world, int stage)
